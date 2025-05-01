@@ -7,20 +7,27 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- efeitos de fundo -->
+  <div class="hearts"></div>
+  <div class="balloons"></div>
+  <div class="confetti"></div>
+
   <div class="container">
+    <!-- Embed Spotify -->
+    <iframe
+      style="border-radius:12px"
+      src="https://open.spotify.com/embed/track/1DLKuppSYytOuxhtI6KBGu?utm_source=generator&theme=0"
+      width="100%" height="80"
+      frameborder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+    </iframe>
 
-    <!-- 1) Player Spotify (substitua o link abaixo pelo embed da sua música) -->
-    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1DLKuppSYytOuxhtI6KBGu?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-
-    <!-- 2) Foto do casal -->
+    <!-- Foto do casal -->
     <div class="photo">
       <img src="foto1.jpeg" alt="Nós dois">
     </div>
 
-    <!-- 3) Cabeçalho do contador -->
     <h1>❤️ Eu te amo há:</h1>
-
-    <!-- 4) Timer -->
     <div id="timer">
       <span id="years">0</span> anos,
       <span id="days">0</span> dias,
@@ -31,37 +38,67 @@
   </div>
 
   <script>
-    // 1) Defina a data de início do relacionamento (YYYY, M–1, D, H, M, S)
-    const startDate = new Date(2021, 4, 10, 15, 30, 0); 
-    // Ex: 10 de maio de 2021 às 15:30:00
-
+    // ====== TIMER ======
+    const startDate = new Date(2021, 4, 10, 15, 30, 0);
     function updateTimer() {
-      const now = new Date();
-      let diff = now - startDate;
-
-      const years = Math.floor(diff / (365.25*24*3600*1000));
-      diff -= years * 365.25*24*3600*1000;
-
-      const days = Math.floor(diff / (24*3600*1000));
-      diff -= days * 24*3600*1000;
-
-      const hours = Math.floor(diff / (3600*1000));
-      diff -= hours * 3600*1000;
-
-      const minutes = Math.floor(diff / (60*1000));
-      diff -= minutes * 60*1000;
-
-      const seconds = Math.floor(diff / 1000);
-
+      let diff = Date.now() - startDate;
+      const years   = Math.floor(diff/(365.25*24*3600*1000)); diff -= years*365.25*24*3600*1000;
+      const days    = Math.floor(diff/(24*3600*1000));        diff -= days *24*3600*1000;
+      const hours   = Math.floor(diff/(3600*1000));            diff -= hours*3600*1000;
+      const minutes = Math.floor(diff/(60*1000));              diff -= minutes*60*1000;
+      const seconds = Math.floor(diff/1000);
       document.getElementById('years').textContent   = years;
       document.getElementById('days').textContent    = days;
       document.getElementById('hours').textContent   = hours;
       document.getElementById('minutes').textContent = minutes;
       document.getElementById('seconds').textContent = seconds;
     }
-
     updateTimer();
     setInterval(updateTimer, 1000);
+
+    // ====== CORAÇÕES ======
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (3 + Math.random()*2) + 's';
+      document.querySelector('.hearts').appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
+
+    // ====== BALÕES ======
+    function createBalloon() {
+      const balloon = document.createElement('div');
+      balloon.className = 'balloon';
+      balloon.style.left = (10 + Math.random()*80) + 'vw';
+      balloon.style.animationDuration = (5 + Math.random()*5) + 's';
+      document.querySelector('.balloons').appendChild(balloon);
+      setTimeout(() => balloon.remove(), 10000);
+    }
+    // gera balões nos primeiros 10s
+    for(let i=0; i<20; i++){
+      setTimeout(createBalloon, i * 500);
+    }
+
+    // ====== CONFETE ======
+    function createConfetti(x, y) {
+      const colors = ['#e74c3c','#f1c40f','#2ecc71','#3498db','#9b59b6'];
+      for(let i=0; i<30; i++){
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+        piece.style.left = x + (Math.random()*100 - 50) + 'px';
+        piece.style.top  = y + (Math.random()*100 - 50) + 'px';
+        piece.style.animationDuration = (2 + Math.random()*1) + 's';
+        document.querySelector('.confetti').appendChild(piece);
+        setTimeout(() => piece.remove(), 3000);
+      }
+    }
+    // dispara confete ao clicar
+    document.body.addEventListener('click', e => {
+      createConfetti(e.clientX, e.clientY);
+    });
   </script>
 </body>
 </html>
