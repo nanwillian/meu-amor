@@ -1,0 +1,38 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  background:#111;
+  color:#fff;
+  font-family:-apple-system, sans-serif;
+  text-align:center;
+  padding:1rem;
+}
+.container { max-width:400px; }
+
+iframe {
+  border-radius:8px;
+  margin-bottom:1rem;
+  width:100%;
+}
+
+.photo {
+  margin:1rem 0;
+}
+.photo img {
+  width:100%;
+  border-radius:8px;
+  object-fit:cover;
+}
+
+h1 {
+  margin-bottom:0.5rem;
+  font-size:1.5rem;
+}
+
+#timer {
+  font-size:1.2rem;
+  line-height:1.4;
+}
