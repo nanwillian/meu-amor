@@ -1,164 +1,156 @@
 /* reset e estilo base */
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  position: relative;
-  overflow-x: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: #111;
-  color: #fff;
-  font-family: -apple-system, sans-serif;
-  text-align: center;
-  padding: 1rem;
-}
-
-/* conteúdo principal */
-.container {
-  width: 100%;
-  max-width: 400px;
-  padding: 0 1rem;
-  z-index: 2;
-}
-iframe {
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  width: 100%;
-  height: 80px; /* padrão desktop */
-}
-.photo {
-  margin: 1rem 0;
-}
-.photo img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  object-fit: cover;
-}
-h1 {
-  margin-bottom: .5rem;
-  font-size: 1.5rem;
-}
-#timer {
-  font-size: 1.2rem;
-  line-height: 1.4;
-}
-
-/* coração */
-.hearts {
-  position: fixed; top:0; left:0;
-  width:100%; height:100%;
-  pointer-events:none; overflow:hidden;
-  z-index:1;
-}
-.heart {
-  position: absolute;
-  width: 20px; height: 20px;
-  background: red;
-  transform: rotate(45deg);
-  animation: drop linear;
-}
-.heart::before,
-.heart::after {
-  content: ""; position: absolute;
-  width:20px; height:20px;
-  background:red; border-radius:50%;
-}
-.heart::before { top:-10px; left:0; }
-.heart::after  { top:0; left:-10px; }
-@keyframes drop {
-  0%   { transform: translateY(-10px) rotate(45deg); opacity:1; }
-  100% { transform: translateY(100vh) rotate(45deg); opacity:0; }
-}
-
-/* balões */
-.balloons {
-  position: fixed; top:0; left:0;
-  width:100%; height:100%;
-  pointer-events:none; overflow:hidden;
-  z-index:1;
-}
-.balloon {
-  position: absolute;
-  width: 30px; height: 40px;
-  background: #e84393;
-  border-radius: 50% 50% 50% 50%;
-  opacity: .9;
-  animation: floatUp ease-out forwards;
-}
-.balloon::after {
-  content: "";
-  position: absolute;
-  bottom: -10px; left: 50%;
-  width: 2px; height: 10px;
-  background: #ccc;
-  transform: translateX(-50%);
-}
-@keyframes floatUp {
-  0%   { transform: translateY(100vh) scale(0.8); }
-  100% { transform: translateY(-20vh) scale(1); }
-}
-
-/* confete */
-.confetti {
-  position: fixed; top:0; left:0;
-  width:100%; height:100%;
-  pointer-events:none; overflow:hidden;
-  z-index:1;
-}
-.confetti-piece {
-  position: absolute;
-  width: 6px; height: 6px;
-  opacity: 1;
-  animation: confettiFall ease-out forwards;
-}
-@keyframes confettiFall {
-  0%   { opacity:1; transform: translateY(0) rotate(0deg); }
-  100% { opacity:0; transform: translateY(200px) rotate(360deg); }
-}
-
-/* ————— Responsividade ————— */
-@media (max-width: 600px) {
-  /* container fica mais estreito */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    position: relative;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #111;
+    color: #fff;
+    font-family: -apple-system, sans-serif;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  /* conteúdo principal */
   .container {
-    max-width: 90%;
-    padding: 0 0.5rem;
+    width: 100%;
+    max-width: 400px;
+    padding: 0 1rem;
+    z-index: 2;
   }
-  /* reduz player */
+  
   iframe {
-    height: 60px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    width: 100%;
+    height: 152px;
+    overflow: hidden;
   }
-  /* reduz foto */
+  
+  /* imagem redimensionável */
   .photo img {
-    max-height: 200px;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    margin: 1rem 0;
   }
-  /* fontes menores */
+  
   h1 {
-    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
   }
+  
   #timer {
-    font-size: 1rem;
+    font-size: 1.2rem;
+    line-height: 1.4;
   }
-  /* corações menores */
+  
+  /* corações */
+  .hearts, .balloons, .confetti, .fireworks {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  /* heart */
   .heart {
-    width: 15px; height: 15px;
+    position: absolute;
+    width: 20px; height: 20px;
+    background: red;
+    transform: rotate(45deg);
+    animation: drop linear;
   }
   .heart::before,
   .heart::after {
-    width: 15px; height: 15px;
+    content: "";
+    position: absolute;
+    width: 20px; height: 20px;
+    background: red;
+    border-radius: 50%;
   }
-  /* balões menores */
+  .heart::before { top: -10px; left: 0; }
+  .heart::after  { top:  0; left: -10px; }
+  
+  @keyframes drop {
+    0%   { opacity:1; transform: translateY(-10px) rotate(45deg); }
+    100% { opacity:0; transform: translateY(100vh) rotate(45deg); }
+  }
+  
+  /* balloons */
   .balloon {
-    width: 20px; height: 30px;
+    position: absolute;
+    width: 30px; height: 40px;
+    background: #e84393;
+    border-radius: 50%;
+    opacity: 0.9;
+    animation: floatUp ease-out forwards;
   }
   .balloon::after {
-    bottom: -8px;
-    height: 8px;
+    content: "";
+    position: absolute;
+    bottom: -10px; left: 50%;
+    width: 2px; height: 10px;
+    background: #ccc;
+    transform: translateX(-50%);
   }
-  /* confete menor */
+  @keyframes floatUp {
+    0%   { transform: translateY(100vh) scale(0.8); }
+    100% { transform: translateY(-20vh) scale(1); }
+  }
+  
+  /* confetti */
   .confetti-piece {
-    width: 4px; height: 4px;
+    position: absolute;
+    width: 6px; height: 6px;
+    opacity: 1;
+    animation: confettiFall ease-out forwards;
   }
-}
+  @keyframes confettiFall {
+    0%   { opacity:1; transform: translateY(0) rotate(0deg); }
+    100% { opacity:0; transform: translateY(200px) rotate(360deg); }
+  }
+  
+  /* fireworks */
+  .firework-piece {
+    position: absolute;
+    width: 4px; height: 10px;
+    border-radius: 2px;
+    opacity: 1;
+    transform: rotate(var(--angle)) translateY(0);
+    animation: burst 0.8s ease-out forwards;
+  }
+  @keyframes burst {
+    to {
+      opacity: 0;
+      transform: rotate(var(--angle)) translateY(var(--distance));
+    }
+  }
+  
+  /* responsividade */
+  @media (max-width: 600px) {
+    .container { max-width: 90%; padding: 0 0.5rem; }
+    iframe { height: 120px !important; }
+    .photo img { max-width: 90vw; }
+    h1 { font-size: 1.25rem; }
+    #timer { font-size: 1rem; }
+    .heart { width: 15px; height: 15px; }
+    .heart::before, .heart::after { width: 15px; height: 15px; }
+    .balloon { width: 20px; height: 30px; }
+    .balloon::after { bottom: -8px; height: 8px; }
+    .confetti-piece { width: 4px; height: 4px; }
+    .firework-piece { width: 3px; height: 8px; }
+  }
+  

@@ -11,15 +11,18 @@
   <div class="hearts"></div>
   <div class="balloons"></div>
   <div class="confetti"></div>
+  <div class="fireworks"></div>
 
   <div class="container">
     <!-- Embed Spotify -->
     <iframe
-      style="border-radius:12px"
+      style="border-radius:12px; overflow:hidden; border:none;"
       src="https://open.spotify.com/embed/track/1DLKuppSYytOuxhtI6KBGu?utm_source=generator&theme=0"
-      width="100%" height="80"
+      width="100%"
+      height="152"
       frameborder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy">
     </iframe>
 
     <!-- Foto do casal -->
@@ -38,6 +41,22 @@
   </div>
 
   <script>
+    // ======= Explosão a cada carregamento =======
+    document.addEventListener('DOMContentLoaded', initialBurst);
+  
+    function initialBurst() {
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
+      // Confetes no centro
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => createConfetti(cx, cy), i * 100);
+      }
+      // Fogos em posições aleatórias
+      for (let i = 0; i < 5; i++) {
+        setTimeout(createFireworksBurst, i * 700);
+      }
+    }
+  
     // ====== TIMER ======
     const startDate = new Date(2021, 4, 10, 15, 30, 0);
     function updateTimer() {
@@ -55,7 +74,7 @@
     }
     updateTimer();
     setInterval(updateTimer, 1000);
-
+  
     // ====== CORAÇÕES ======
     function createHeart() {
       const heart = document.createElement('div');
@@ -66,39 +85,59 @@
       setTimeout(() => heart.remove(), 5000);
     }
     setInterval(createHeart, 300);
-
+  
     // ====== BALÕES ======
     function createBalloon() {
-      const balloon = document.createElement('div');
-      balloon.className = 'balloon';
-      balloon.style.left = (10 + Math.random()*80) + 'vw';
-      balloon.style.animationDuration = (5 + Math.random()*5) + 's';
-      document.querySelector('.balloons').appendChild(balloon);
-      setTimeout(() => balloon.remove(), 10000);
+      const b = document.createElement('div');
+      b.className = 'balloon';
+      b.style.left = (10 + Math.random()*80) + 'vw';
+      b.style.animationDuration = (5 + Math.random()*5) + 's';
+      document.querySelector('.balloons').appendChild(b);
+      setTimeout(() => b.remove(), 10000);
     }
-    // gera balões nos primeiros 10s
-    for(let i=0; i<20; i++){
+    for (let i = 0; i < 20; i++) {
       setTimeout(createBalloon, i * 500);
     }
-
-    // ====== CONFETE ======
+  
+    // ====== CONFETE AO CLIQUE ======
     function createConfetti(x, y) {
       const colors = ['#e74c3c','#f1c40f','#2ecc71','#3498db','#9b59b6'];
-      for(let i=0; i<30; i++){
+      for (let i = 0; i < 30; i++) {
         const piece = document.createElement('div');
         piece.className = 'confetti-piece';
         piece.style.background = colors[Math.floor(Math.random()*colors.length)];
         piece.style.left = x + (Math.random()*100 - 50) + 'px';
         piece.style.top  = y + (Math.random()*100 - 50) + 'px';
-        piece.style.animationDuration = (2 + Math.random()*1) + 's';
+        piece.style.animationDuration = (2 + Math.random()) + 's';
         document.querySelector('.confetti').appendChild(piece);
         setTimeout(() => piece.remove(), 3000);
       }
     }
-    // dispara confete ao clicar
     document.body.addEventListener('click', e => {
       createConfetti(e.clientX, e.clientY);
     });
+  
+    // ====== FOGOS ======
+    function createFireworksBurst() {
+      const count = 20;
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight * 0.4 + (window.innerHeight * 0.1);
+      const colors = ['#fffa65','#ff3864','#32ff7e','#7efff5','#ff7eb9'];
+      for (let i = 0; i < count; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'firework-piece';
+        const angle = Math.random() * 360 + 'deg';
+        const dist  = 80 + Math.random() * 80 + 'px';
+        piece.style.setProperty('--angle', angle);
+        piece.style.setProperty('--distance', dist);
+        piece.style.left = x + 'px';
+        piece.style.top  = y + 'px';
+        piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+        document.querySelector('.fireworks').appendChild(piece);
+        setTimeout(() => piece.remove(), 1000);
+      }
+    }
   </script>
+  
 </body>
 </html>
