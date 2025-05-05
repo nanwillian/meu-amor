@@ -189,11 +189,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // ======= SLIDER DOS AMIGOS =======
   const friends = [
     {
-      message: "PARABÉNS MEU AMOOOOR! Desejo tudo de melhor, que todos os seus sonhos se realizem!",
+      message: "PARABÉNS MEU AMOOOOR! Desejo tudo de melhor, que todos os seus sonhos se realizem! Sempre estarei aqui torcendo por vc! Te amo demais!  obrigado por tanto. ❤️",
       image: "amigos/felipe.jpeg"
     },
     {
-      message: "Feliz aniversário maridaaaa! Obrigada pelos nossos momentos, risadas e por sempre estar presente! Te amo! 💕",
+      message: "Feliz aniversário maridaaaa!!! Obrigada por todos os nossos momentos, pelas risadas, pelos choros, pelas fofocas e por sempre estar presente (mesmo de longe) em todos os momentos da minha vida. Não consigo imaginar minha vida sem você! Eu te amo muito! 💕",
       image: "amigos/lais.jpeg"
     }
   ];
