@@ -2,352 +2,75 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Eu te amo há…</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Eu te amo há…</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <!-- efeitos de fundo -->
-    <div class="hearts"></div>
-    <div class="balloons"></div>
-    <div class="confetti"></div>
-    <div class="fireworks"></div>
+  <!-- efeitos de fundo -->
+  <div class="hearts"></div>
+  <div class="balloons"></div>
+  <div class="confetti"></div>
+  <div class="fireworks"></div>
 
-    <div class="container">
-        <!-- Embed Spotify -->
-        <iframe src="https://open.spotify.com/embed/track/1DLKuppSYytOuxhtI6KBGu?utm_source=generator&theme=0"
-            width="100%" height="80" frameborder="0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            style="border-radius: 12px;" loading="lazy">
-        </iframe>
+  <div class="container">
+    <!-- Embed Spotify -->
+    <iframe src="https://open.spotify.com/embed/track/1DLKuppSYytOuxhtI6KBGu?utm_source=generator&theme=0"
+      width="100%" height="80" frameborder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      style="border-radius: 12px;" loading="lazy">
+    </iframe>
 
-
-        <div class="photo gallery-container">
-            <img id="gallery-photo" src="imagens/foto1.jpg" alt="Foto do casal" />
-            <button class="gallery-arrow left" onclick="prevPhoto()">❮</button>
-            <button class="gallery-arrow right" onclick="nextPhoto()">❯</button>
-        </div>
-
-        <h1>❤️ Eu te amo há:</h1>
-        <div id="timer">
-            <span id="years">0</span> anos,
-            <span id="days">0</span> dias,
-            <span id="hours">0</span> horas,
-            <span id="minutes">0</span> minutos e
-            <span id="seconds">0</span> segundos
-        </div>
-        <button id="reveal-btn">Mostrar uma mensagem especial 💌</button>
-
-        <div id="secret-section" style="display: none;">
-
-            <div class="photo gallery-container small-gallery">
-                <img id="gallery-photo-2" src="fotos/foto1.jpg" alt="Nós dois">
-                <button class="gallery-arrow left" onclick="prevPhoto2()">❮</button>
-                <button class="gallery-arrow right" onclick="nextPhoto2()">❯</button>
-            </div>
-
-            <p class="love-message">
-                Pois é, meu amor… o primeiro de muitos aniversários que teremos o privilégio de celebrar juntos.<br><br>
-                Hoje, mais do que nunca, quero te desejar tudo de mais lindo que existe nesse mundo. Você é uma garota
-                excepcional, sou completamente apaixonado por cada pedacinho de você. 💖<br><br>
-                Que Deus te abençoe imensamente, guiando seus passos com luz e amor. Continue sendo essa mulher
-                incrível, cheia de vida, brilho e essência.<br><br>
-                Tenho tanto orgulho da pessoa que você é… de quem você foi e de tudo o que ainda vai se tornar.<br><br>
-                Te amo além das palavras, além do tempo…<br>
-                <em>"O amor é a única coisa que transcende o tempo e o espaço." — Dr. Brand</em><br><br>
-                Te amo na distância da ida e volta até a Lua.<br>
-                Do tamanho de um pontinho numa folha de papel.<br>
-                Te amo infinitamente. ♾️💖
-            </p>
-
-        </div>
-
-        <button id="reveal-friends-btn" style="display: none;">Achou que só teria a minha? 😏</button>
-
-        <div id="friends-slider" style="display: none;">
-            <div class="friend-slide" id="friend-slide">
-                <div class="friend-bg" id="friend-bg"></div>
-                <p class="friend-message" id="friend-message"></p>
-            </div>
-            <div class="friend-controls">
-                <button onclick="prevFriend()">❮</button>
-                <button onclick="nextFriend()">❯</button>
-            </div>
-        </div>
-
-
+    <div class="photo gallery-container">
+      <img id="gallery-photo" src="imagens/foto1.jpg" alt="Foto do casal" />
+      <button class="gallery-arrow left" onclick="prevPhoto()">❮</button>
+      <button class="gallery-arrow right" onclick="nextPhoto()">❯</button>
     </div>
 
-    <script>
-        // ======= Explosão a cada carregamento =======
-        document.addEventListener('DOMContentLoaded', initialBurst);
+    <h1>❤️ Eu te amo há:</h1>
+    <div id="timer"></div>
 
-        function initialBurst() {
-            const cx = window.innerWidth / 2;
-            const cy = window.innerHeight / 2;
-            // Confetes no centro
-            for (let i = 0; i < 15; i++) {
-                setTimeout(() => {
-                    const x = Math.random() * window.innerWidth;
-                    const y = Math.random() * window.innerHeight;
-                    createConfetti(x, y);
-                }, i * 100);
-            }
+    <button id="reveal-btn">Mostrar uma mensagem especial 💌</button>
 
-            // Fogos em posições aleatórias
-            for (let i = 0; i < 15; i++) {
-                setTimeout(createFireworksBurst, i * 700);
-            }
-        }
+    <div id="secret-section" style="display: none;">
+      <div class="photo gallery-container small-gallery">
+        <img id="gallery-photo-2" src="fotos/foto1.jpg" alt="Nós dois">
+        <button class="gallery-arrow left" onclick="prevPhoto2()">❮</button>
+        <button class="gallery-arrow right" onclick="nextPhoto2()">❯</button>
+      </div>
 
-        // ====== TIMER ======
-        const startDate = new Date(2024, 9, 20, 22, 0, 0); // mês começa em 0, então 9 = outubro
+      <p class="love-message">
+        Pois é, meu amor… o primeiro de muitos aniversários que teremos o privilégio de celebrar juntos.<br><br>
+        Hoje, mais do que nunca, quero te desejar tudo de mais lindo que existe nesse mundo. Você é uma garota
+        excepcional, sou completamente apaixonado por cada pedacinho de você. 💖<br><br>
+        Que Deus te abençoe imensamente, guiando seus passos com luz e amor. Continue sendo essa mulher
+        incrível, cheia de vida, brilho e essência.<br><br>
+        Tenho tanto orgulho da pessoa que você é… de quem você foi e de tudo o que ainda vai se tornar.<br><br>
+        Te amo além das palavras, além do tempo…<br>
+        <em>"O amor é a única coisa que transcende o tempo e o espaço." — Dr. Brand</em><br><br>
+        Te amo na distância da ida e volta até a Lua.<br>
+        Do tamanho de um pontinho numa folha de papel.<br>
+        Te amo infinitamente. ♾️💖
+      </p>
+    </div>
 
-        function updateTimer() {
-            const now = new Date();
-            let diffMs = now - startDate;
+    <button id="reveal-friends-btn" style="display: none;">Achou que só teria a minha? 😏</button>
 
-            if (diffMs < 0) {
-                document.getElementById("timer").textContent = "Ainda não começou ❤️";
-                return;
-            }
+    <div id="friends-slider" style="display: none;">
+      <div class="friend-slide" id="friend-slide">
+        <div class="friend-bg" id="friend-bg"></div>
+        <p class="friend-message" id="friend-message"></p>
+      </div>
+      <div class="friend-controls">
+        <button onclick="prevFriend()">❮</button>
+        <button onclick="nextFriend()">❯</button>
+      </div>
+    </div>
+  </div>
 
-            const oneSecond = 1000;
-            const oneMinute = 60 * oneSecond;
-            const oneHour = 60 * oneMinute;
-            const oneDay = 24 * oneHour;
-            const oneMonth = 30.44 * oneDay; // média
-            const oneYear = 365.25 * oneDay;
-
-            const years = Math.floor(diffMs / oneYear);
-            diffMs -= years * oneYear;
-
-            const months = Math.floor(diffMs / oneMonth);
-            diffMs -= months * oneMonth;
-
-            const days = Math.floor(diffMs / oneDay);
-            diffMs -= days * oneDay;
-
-            const hours = Math.floor(diffMs / oneHour);
-            diffMs -= hours * oneHour;
-
-            const minutes = Math.floor(diffMs / oneMinute);
-            diffMs -= minutes * oneMinute;
-
-            const seconds = Math.floor(diffMs / oneSecond);
-
-            let result = '';
-
-            if (years >= 1) {
-                result = `${years} ano${years > 1 ? 's' : ''}, ${months} mês${months !== 1 ? 'es' : ''}, ${days} dia${days !== 1 ? 's' : ''}, ${hours}h ${minutes}min ${seconds}s`;
-            } else {
-                result = `${months} mês${months !== 1 ? 'es' : ''}, ${days} dia${days !== 1 ? 's' : ''}, ${hours}h ${minutes}min ${seconds}s`;
-            }
-
-            document.getElementById("timer").textContent = result;
-        }
-
-        updateTimer();
-        setInterval(updateTimer, 1000);
-
-        // ====== CORAÇÕES ======
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.top = '-50px'; // força o nascimento acima da tela
-            heart.style.animationDuration = (3 + Math.random() * 2) + 's';
-            document.querySelector('.hearts').appendChild(heart);
-            setTimeout(() => heart.remove(), 5000);
-        }
-
-        setInterval(createHeart, 300);
-
-        // ====== BALÕES ======
-        function createBalloon() {
-            const b = document.createElement('div');
-            b.className = 'balloon';
-            b.style.left = (10 + Math.random() * 80) + 'vw';
-            b.style.animationDuration = (5 + Math.random() * 5) + 's';
-            document.querySelector('.balloons').appendChild(b);
-            setTimeout(() => b.remove(), 10000);
-        }
-        for (let i = 0; i < 20; i++) {
-            setTimeout(createBalloon, i * 500);
-        }
-
-        // ====== CONFETE AO CLIQUE ======
-        function createConfetti(x, y) {
-            const colors = ['#e74c3c', '#f1c40f', '#2ecc71', '#3498db', '#9b59b6'];
-            for (let i = 0; i < 30; i++) {
-                const piece = document.createElement('div');
-                piece.className = 'confetti-piece';
-                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-                piece.style.left = x + (Math.random() * 100 - 50) + 'px';
-                piece.style.top = y + (Math.random() * 100 - 50) + 'px';
-                piece.style.animationDuration = (2 + Math.random()) + 's';
-                document.querySelector('.confetti').appendChild(piece);
-                setTimeout(() => piece.remove(), 3000);
-            }
-        }
-        document.body.addEventListener('click', e => {
-            createConfetti(e.clientX, e.clientY);
-        });
-
-        // ====== FOGOS ======
-        function createFireworksBurst() {
-            const count = 20;
-            const x = Math.random() * window.innerWidth;
-            const y = Math.random() * window.innerHeight * 0.4 + (window.innerHeight * 0.1);
-            const colors = ['#fffa65', '#ff3864', '#32ff7e', '#7efff5', '#ff7eb9'];
-            for (let i = 0; i < count; i++) {
-                const piece = document.createElement('div');
-                piece.className = 'firework-piece';
-                const angle = Math.random() * 360 + 'deg';
-                const dist = 80 + Math.random() * 80 + 'px';
-                piece.style.setProperty('--angle', angle);
-                piece.style.setProperty('--distance', dist);
-                piece.style.left = x + 'px';
-                piece.style.top = y + 'px';
-                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-                document.querySelector('.fireworks').appendChild(piece);
-                setTimeout(() => piece.remove(), 1000);
-            }
-        }
-    </script>
-
-    <script>
-        const photos = [];
-        for (let i = 1; i <= 10; i++) {
-            photos.push(`julia/julia_ (${i}).jpeg`);
-        }
-
-        // Função para embaralhar (Fisher-Yates)
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
-
-        // Embaralha as fotos
-        shuffle(photos);
-
-        // Continua o script normalmente...
-        let currentIndex = 0;
-        const galleryImg = document.getElementById('gallery-photo');
-
-        function showPhoto(index) {
-            galleryImg.style.opacity = 0;
-            setTimeout(() => {
-                galleryImg.src = photos[index];
-                galleryImg.style.opacity = 1;
-            }, 250);
-        }
-
-        function nextPhoto() {
-            currentIndex = (currentIndex + 1) % photos.length;
-            showPhoto(currentIndex);
-        }
-
-        function prevPhoto() {
-            currentIndex = (currentIndex - 1 + photos.length) % photos.length;
-            showPhoto(currentIndex);
-        }
-
-        showPhoto(currentIndex);
-        setInterval(nextPhoto, 5000);
-
-    </script>
-
-    <script>
-        const photos2 = [];
-        for (let i = 1; i <= 10; i++) {
-            photos2.push(`casal/casal_ (${i}).jpeg`);
-        }
-
-        // Embaralha as fotos da nova galeria
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
-        shuffle(photos2);
-
-
-        let currentIndex2 = 0;
-        const galleryImg2 = document.getElementById('gallery-photo-2');
-
-        function showPhoto2(index) {
-            galleryImg2.style.opacity = 0;
-            setTimeout(() => {
-                galleryImg2.src = photos2[index];
-                galleryImg2.style.opacity = 1;
-            }, 250);
-        }
-
-        function nextPhoto2() {
-            currentIndex2 = (currentIndex2 + 1) % photos2.length;
-            showPhoto2(currentIndex2);
-        }
-
-        function prevPhoto2() {
-            currentIndex2 = (currentIndex2 - 1 + photos2.length) % photos2.length;
-            showPhoto2(currentIndex2);
-        }
-
-        // Inicia com a primeira imagem
-        showPhoto2(currentIndex2);
-
-        // Revelar sessão ao clicar
-        document.getElementById("reveal-btn").addEventListener("click", () => {
-            document.getElementById("secret-section").style.display = "block";
-            document.getElementById("reveal-btn").style.display = "none";
-            document.getElementById("reveal-friends-btn").style.display = "inline-block"; // ← aparece depois
-        });
-        document.getElementById("reveal-friends-btn").addEventListener("click", () => {
-            document.getElementById("friends-slider").style.display = "block";
-            updateFriendSlide(currentFriend); // inicia com o primeiro
-        });
-
-
-        const friends = [
-            {
-                message: "PARABÉNS MEU AMOOOOR! Desejo tudo de melhor, que todos os seus sonhos se realizem! Sempre estarei aqui torcendo por vc! Te amo demais!  obrigado por tanto. 💕",
-                image: "amigos/felipe.jpeg"
-            },
-            {
-                message: "Feliz aniversário maridaaaa!!! Obrigada por todos os nossos momentos, pelas risadas, pelos choros, pelas fofocas e por sempre estar presente (mesmo de longe) em todos os momentos da minha vida. Não consigo imaginar minha vida sem você! Eu te amo muito! Eu e você para sempre 💕",
-                image: "amigos/lais.jpeg"
-            },
-        ];
-
-        let currentFriend = 0;
-        const bg = document.getElementById('friend-bg');
-        const msg = document.getElementById('friend-message');
-
-        function updateFriendSlide(index) {
-            bg.style.backgroundImage = `url('${friends[index].image}')`;
-            msg.textContent = friends[index].message;
-        }
-
-        function nextFriend() {
-            currentFriend = (currentFriend + 1) % friends.length;
-            updateFriendSlide(currentFriend);
-        }
-
-        function prevFriend() {
-            currentFriend = (currentFriend - 1 + friends.length) % friends.length;
-            updateFriendSlide(currentFriend);
-        }
-
-    </script>
-
-
-
+  <script src="main.js"></script>
 </body>
 
 </html>
