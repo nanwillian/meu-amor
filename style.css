@@ -6,32 +6,40 @@
 }
 
 body {
-  position: relative;
-  overflow-x: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: #111;
-  color: #fff;
-  font-family: -apple-system, sans-serif;
+  background: linear-gradient(to right, #ffd1dc, #ffe4e1);
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: #444;
   text-align: center;
+  margin: 0;
   padding: 1rem;
 }
 
 /* conteúdo principal */
 .container {
-  width: 100%;
-  max-width: 400px;
-  padding: 0 1rem;
-  position: relative;
-  z-index: 1;
-  /* agora atrás dos corações/efeitos */
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+button {
+  background: #ffb6c1;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ffa6c9;
 }
 
 iframe {
   border-radius: 8px;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
   width: 100%;
   height: 152px;
   overflow: hidden;
@@ -50,8 +58,7 @@ iframe {
 }
 
 h1 {
-  margin-bottom: 0.5rem;
-  font-size: 1.5rem;
+  color: #ff69b4;
 }
 
 #timer {
@@ -242,6 +249,12 @@ h1 {
     height: 8px;
   }
 
+  .gallery-container img {
+    width: 100%;
+    border-radius: 8px;
+    margin: 10px 0;
+  }
+
   /* container da galeria com imagem central */
   .photo.gallery-container {
     position: relative;
@@ -293,6 +306,7 @@ h1 {
 
   #reveal-btn {
     margin-top: 2rem;
+    margin-bottom: 1rem;
     padding: 0.8rem 1.4rem;
     font-size: 1.1rem;
     font-weight: 600;
@@ -318,20 +332,13 @@ h1 {
     animation: fadeIn 1s ease forwards;
   }
 
-  .love-message {
-    font-size: 1.05rem;
-    color: #ffe;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 1rem 1.2rem;
-    border-radius: 12px;
-    line-height: 1.6;
-    text-align: left;
-    max-width: 360px;
-    margin: 1.5rem auto;
-    white-space: pre-line;
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
-  }
-  
+.love-message {
+  background: #fff0f5;
+  padding: 15px;
+  border-radius: 12px;
+  color: #333;
+  margin-top: 20px;
+}
 
   /* galeria menor */
   .small-gallery img {
@@ -352,6 +359,7 @@ h1 {
 
   #reveal-friends-btn {
     margin-top: 1.5rem;
+    margin-bottom: 1rem;
     padding: 0.8rem 1.4rem;
     font-size: 1.05rem;
     font-weight: 600;
@@ -423,7 +431,7 @@ h1 {
     padding: 0.4rem 1rem;
     font-size: 1.5rem;
     background: none;
-    color: #fff;
+    color: #ffd1dc;
     border: none;
     cursor: pointer;
     transition: color 0.3s ease;
