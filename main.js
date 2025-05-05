@@ -190,11 +190,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const friends = [
     {
       message: "PARABÉNS MEU AMOOOOR! Desejo tudo de melhor, que todos os seus sonhos se realizem! Sempre estarei aqui torcendo por vc! Te amo demais!  obrigado por tanto. ❤️",
-      image: "amigos/felipe.jpeg"
+      image: "amigos/felipe.jpeg",
+      author: "Felipe"
     },
     {
       message: "Feliz aniversário maridaaaa!!! Obrigada por todos os nossos momentos, pelas risadas, pelos choros, pelas fofocas e por sempre estar presente (mesmo de longe) em todos os momentos da minha vida. Não consigo imaginar minha vida sem você! Eu te amo muito! 💕",
-      image: "amigos/lais.jpeg"
+      image: "amigos/lais.jpeg",
+      author: "Lais"
     }
   ];
 
@@ -210,10 +212,14 @@ shuffle(friends);
   const bg = document.getElementById('friend-bg');
   const msg = document.getElementById('friend-message');
   
+  const authorElem = document.getElementById('friend-author');
+
   function updateFriendSlide(index) {
     bg.style.backgroundImage = `url('${friends[index].image}')`;
     msg.textContent = friends[index].message;
+    authorElem.textContent = friends[index].author;
   }
+  
   
   function nextFriend() {
     currentFriend = (currentFriend + 1) % friends.length;

@@ -423,9 +423,20 @@ h1 {
   
   .friend-controls {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
     margin-top: 0.5rem;
+    flex-wrap: wrap;
   }
+  
+  .friend-author {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ff69b4;
+    text-align: center;
+    text-shadow: 1px 1px 2px #fff;
+  }  
   
   .friend-controls button {
     padding: 0.4rem 1rem;
