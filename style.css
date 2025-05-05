@@ -441,5 +441,98 @@ h1 {
     color: #ff9;
   }
   
-
+  .friends-gallery {
+    margin: 2rem auto;
+    padding: 1rem;
+    text-align: center;
+    max-width: 600px;
+  }
+  
+  .friends-gallery h2 {
+    font-size: 1.5rem;
+    color: #ff6fa4;
+    margin-bottom: 1rem;
+  }
+  
+  .gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+  }
+  
+  .photo-item {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .photo-item:hover {
+    transform: scale(1.05);
+  }
+  
+  .photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .caption {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    text-shadow: 0 0 4px #000;
+  }
+  
+  /* Modal fullscreen */
+  #lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  
+  /* Responsivo */
+  @media (max-width: 480px) {
+    .photo-item {
+      width: 70px;
+      height: 70px;
+    }
+  
+    .caption {
+      font-size: 0.55rem;
+    }
+  }
+  
 }

@@ -17,11 +17,10 @@
 
   <div class="container">
     <!-- Embed Spotify -->
-    <iframe src="https://open.spotify.com/embed/track/2afCBiru10AFckfOa49wIa?utm_source=generator"
-      width="100%" height="80" frameborder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      style="border-radius: 12px;" loading="lazy">
-    </iframe>
+    <iframe style="border-radius:12px"
+      src="https://open.spotify.com/embed/track/2afCBiru10AFckfOa49wIa?utm_source=generator&theme=0" width="100%"
+      height="352" frameBorder="0" allowfullscreen=""
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
     <div class="photo gallery-container">
       <img id="gallery-photo" src="imagens/foto1.jpg" alt="Foto do casal" />
@@ -43,7 +42,8 @@
 
       <p class="love-message">
         Pois é, meu amor… o primeiro de muitos aniversários que teremos o privilégio de celebrar juntos.<br><br>
-        Hoje, mais do que nunca, quero te desejar tudo de mais lindo que existe nesse mundo. Você é uma garota excepcional, sou completamente apaixonado por cada pedacinho de você. 💖<br><br>
+        Hoje, mais do que nunca, quero te desejar tudo de mais lindo que existe nesse mundo. Você é uma garota
+        excepcional, sou completamente apaixonado por cada pedacinho de você. 💖<br><br>
         Que Deus te abençoe imensamente, guiando seus passos com luz e amor. Continue sendo essa mulher
         incrível, cheia de vida, brilho e essência.<br><br>
         Tenho tanto orgulho da pessoa que você é… de quem você foi e de tudo o que ainda vai se tornar.<br><br>
@@ -67,7 +67,30 @@
         <button onclick="prevFriend()">❮</button>
         <button onclick="nextFriend()">❯</button>
       </div>
+      <section class="friends-gallery">
+        <h2>👯‍♀️ Memórias com quem te ama</h2>
+        <div class="gallery-grid">
+          <div class="photo-item">
+            <img src="amigos-galeria/amigos_ (1).jpeg" alt="Felipe" onclick="openFullscreen(this)">
+          </div>
+          <div class="photo-item">
+            <img src="amigos-galeria/amigos_ (2).jpeg" alt="Felipe" onclick="openFullscreen(this)">
+          </div>
+          <div class="photo-item">
+            <img src="amigos-galeria/amigos_ (3).jpeg" alt="Felipe" onclick="openFullscreen(this)">
+          </div>
+          <div class="photo-item">
+            <img src="amigos-galeria/amigos_ (4).jpeg" alt="Felipe" onclick="openFullscreen(this)">
+          </div>
+        </div>
+      </section>
+
+      <!-- Modal fullscreen -->
+      <div id="lightbox" onclick="closeFullscreen()">
+        <img id="lightbox-img" src="" alt="Foto grande">
+      </div>
     </div>
+
   </div>
 
   <script src="main.js"></script>

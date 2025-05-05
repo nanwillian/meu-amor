@@ -225,3 +225,18 @@ shuffle(friends);
     updateFriendSlide(currentFriend);
   }
   
+  const galleryGrid = document.querySelector('.gallery-grid');
+const items = Array.from(galleryGrid.children);
+items.sort(() => Math.random() - 0.5).forEach(item => galleryGrid.appendChild(item));
+
+function openFullscreen(img) {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  lightboxImg.src = img.src;
+  lightbox.style.display = 'flex';
+}
+
+function closeFullscreen() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+
