@@ -50,8 +50,10 @@
 
             <p class="love-message">
                 Pois é, meu amor… o primeiro de muitos aniversários que teremos o privilégio de celebrar juntos.<br><br>
-                Hoje, mais do que nunca, quero te desejar tudo de mais lindo que existe nesse mundo. Você é uma garota excepcional, sou completamente apaixonado por cada pedacinho de você. 💖<br><br>
-                Que Deus te abençoe imensamente, guiando seus passos com luz e amor. Continue sendo essa mulher incrível, cheia de vida, brilho e essência.<br><br>
+                Hoje, mais do que nunca, quero te desejar tudo de mais lindo que existe nesse mundo. Você é uma garota
+                excepcional, sou completamente apaixonado por cada pedacinho de você. 💖<br><br>
+                Que Deus te abençoe imensamente, guiando seus passos com luz e amor. Continue sendo essa mulher
+                incrível, cheia de vida, brilho e essência.<br><br>
                 Tenho tanto orgulho da pessoa que você é… de quem você foi e de tudo o que ainda vai se tornar.<br><br>
                 Te amo além das palavras, além do tempo…<br>
                 <em>"O amor é a única coisa que transcende o tempo e o espaço." — Dr. Brand</em><br><br>
@@ -59,8 +61,22 @@
                 Do tamanho de um pontinho numa folha de papel.<br>
                 Te amo infinitamente. ♾️💖
             </p>
-            
+
         </div>
+
+        <button id="reveal-friends-btn" style="display: none;">Achou que só teria a minha? 😏</button>
+
+        <div id="friends-slider" style="display: none;">
+            <div class="friend-slide" id="friend-slide">
+                <div class="friend-bg" id="friend-bg"></div>
+                <p class="friend-message" id="friend-message"></p>
+            </div>
+            <div class="friend-controls">
+                <button onclick="prevFriend()">❮</button>
+                <button onclick="nextFriend()">❯</button>
+            </div>
+        </div>
+
 
     </div>
 
@@ -290,8 +306,46 @@
         document.getElementById("reveal-btn").addEventListener("click", () => {
             document.getElementById("secret-section").style.display = "block";
             document.getElementById("reveal-btn").style.display = "none";
+            document.getElementById("reveal-friends-btn").style.display = "inline-block"; // ← aparece depois
         });
+        document.getElementById("reveal-friends-btn").addEventListener("click", () => {
+            document.getElementById("friends-slider").style.display = "block";
+            updateFriendSlide(currentFriend); // inicia com o primeiro
+        });
+
+
+        const friends = [
+            {
+                message: "PARABÉNS MEU AMOOOOR! Desejo tudo de melhor, que todos os seus sonhos se realizem! Sempre estarei aqui torcendo por vc! Te amo demais!  obrigado por tanto. 💕",
+                image: "amigos/felipe.jpeg"
+            },
+            {
+                message: "Feliz aniversário maridaaaa!!! Obrigada por todos os nossos momentos, pelas risadas, pelos choros, pelas fofocas e por sempre estar presente (mesmo de longe) em todos os momentos da minha vida. Não consigo imaginar minha vida sem você! Eu te amo muito! Eu e você para sempre 💕",
+                image: "amigos/lais.jpeg"
+            },
+        ];
+
+        let currentFriend = 0;
+        const bg = document.getElementById('friend-bg');
+        const msg = document.getElementById('friend-message');
+
+        function updateFriendSlide(index) {
+            bg.style.backgroundImage = `url('${friends[index].image}')`;
+            msg.textContent = friends[index].message;
+        }
+
+        function nextFriend() {
+            currentFriend = (currentFriend + 1) % friends.length;
+            updateFriendSlide(currentFriend);
+        }
+
+        function prevFriend() {
+            currentFriend = (currentFriend - 1 + friends.length) % friends.length;
+            updateFriendSlide(currentFriend);
+        }
+
     </script>
+
 
 
 </body>

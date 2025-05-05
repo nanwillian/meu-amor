@@ -350,4 +350,83 @@ h1 {
     }
   }
 
+  #reveal-friends-btn {
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.4rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease;
+  }
+  
+  #reveal-friends-btn:hover {
+    transform: scale(1.05);
+  }
+  
+  #friends-slider {
+    margin-top: 2rem;
+    max-width: 400px;
+    margin-inline: auto;
+  }
+  
+  .friend-slide {
+    position: relative;
+    height: 250px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  }  
+  
+  .friend-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.4);
+    z-index: 1;
+  }
+  
+  .friend-message {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem 1rem 1.2rem;
+    color: #fff;
+    font-size: 0.7rem;
+    line-height: 1.5;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent);
+    text-align: center;
+    z-index: 2;
+    text-shadow: 1px 1px 4px #000;
+    box-sizing: border-box;
+  }
+  
+  .friend-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+  }
+  
+  .friend-controls button {
+    padding: 0.4rem 1rem;
+    font-size: 1.5rem;
+    background: none;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .friend-controls button:hover {
+    color: #ff9;
+  }
+  
+
 }
