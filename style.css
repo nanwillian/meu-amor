@@ -292,20 +292,26 @@ h1 {
 
 
   #reveal-btn {
-    margin-top: 1rem;
-    padding: 0.6rem 1rem;
-    font-size: 1rem;
+    margin-top: 2rem;
+    padding: 0.8rem 1.4rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #ff85c1, #ff4f8b);
     border: none;
-    border-radius: 8px;
-    background: #e84393;
-    color: white;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(255, 79, 139, 0.4);
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
   }
-
+  
   #reveal-btn:hover {
-    background: #d63072;
-  }
+    background: linear-gradient(135deg, #ff9bcf, #ff6ba2);
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(255, 105, 160, 0.5);
+  }  
 
   #secret-section {
     margin-top: 1.5rem;
@@ -313,11 +319,19 @@ h1 {
   }
 
   .love-message {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    color: #ffc;
+    font-size: 1.05rem;
+    color: #ffe;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
     line-height: 1.6;
+    text-align: left;
+    max-width: 360px;
+    margin: 1.5rem auto;
+    white-space: pre-line;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
   }
+  
 
   /* galeria menor */
   .small-gallery img {
