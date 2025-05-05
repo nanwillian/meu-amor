@@ -215,5 +215,54 @@
       width: 3px;
       height: 8px;
     }
+    /* container da galeria com imagem central */
+.photo.gallery-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.photo.gallery-container img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+  transition: opacity 0.5s ease-in-out;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* botões de navegação laterais */
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.2rem;
+  color: #ffffffcc;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+  padding: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.gallery-arrow:hover {
+  color: #ffffff;
+}
+
+.gallery-arrow.left {
+  left: 10px;
+}
+
+.gallery-arrow.right {
+  right: 10px;
+}
+
+
   }
   
