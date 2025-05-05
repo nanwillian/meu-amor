@@ -240,3 +240,19 @@ function closeFullscreen() {
   document.getElementById('lightbox').style.display = 'none';
 }
 
+
+// === Galeria final: clique para ampliar ===
+const gridImages = document.querySelectorAll('.photo-grid img');
+const modal = document.getElementById('imageModal');
+const modalImg = modal.querySelector('img');
+
+gridImages.forEach(img => {
+    img.addEventListener('click', () => {
+        modalImg.src = img.src;
+        modal.classList.add('show');
+    });
+});
+
+modal.addEventListener('click', () => {
+    modal.classList.remove('show');
+});
