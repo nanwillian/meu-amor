@@ -1,268 +1,339 @@
 /* reset e estilo base */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    position: relative;
-    overflow-x: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #111;
-    color: #fff;
-    font-family: -apple-system, sans-serif;
-    text-align: center;
-    padding: 1rem;
-  }
-  
-  /* conteúdo principal */
-  .container {
-    width: 100%;
-    max-width: 400px;
-    padding: 0 1rem;
-    position: relative;
-    z-index: 1; /* agora atrás dos corações/efeitos */
-  }
-  
-  iframe {
-    border-radius: 8px;
-    margin-bottom: 1rem;
-    width: 100%;
-    height: 152px;
-    overflow: hidden;
-  }
-  
-  /* imagem redimensionável */
-  .photo img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 8px;
-    object-fit: contain; /* mostra a imagem inteira */
-    display: block;
-    margin: 1rem 0;
-  }
-  
-  h1 {
-    margin-bottom: 0.5rem;
-    font-size: 1.5rem;
-  }
-  
-  #timer {
-    font-size: 1.2rem;
-    line-height: 1.4;
-  }
-  
-  /* corações, balões, confetes, fogos */
-  .hearts, .balloons, .confetti, .fireworks {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 2; /* agora acima da imagem e container */
-  }
-  
-  /* heart */
-  .heart {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: red;
-    transform: rotate(45deg);
-    animation: drop linear;
-  }
-  .heart::before,
-  .heart::after {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: red;
-    border-radius: 50%;
-  }
-  .heart::before {
-    top: -10px;
-    left: 0;
-  }
-  .heart::after {
-    top: 0;
-    left: -10px;
-  }
-  
-  @keyframes drop {
-    0% {
-      opacity: 1;
-      transform: translateY(-10px) rotate(45deg);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(100vh) rotate(45deg);
-    }
-  }
-  
-  /* balloons */
-  .balloon {
-    position: absolute;
-    width: 30px;
-    height: 40px;
-    background: #e84393;
-    border-radius: 50%;
-    opacity: 0.9;
-    animation: floatUp ease-out forwards;
-  }
-  .balloon::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    width: 2px;
-    height: 10px;
-    background: #ccc;
-    transform: translateX(-50%);
-  }
-  @keyframes floatUp {
-    0% {
-      transform: translateY(100vh) scale(0.8);
-    }
-    100% {
-      transform: translateY(-20vh) scale(1);
-    }
-  }
-  
-  /* confetti */
-  .confetti-piece {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    opacity: 1;
-    animation: confettiFall ease-out forwards;
-  }
-  @keyframes confettiFall {
-    0% {
-      opacity: 1;
-      transform: translateY(0) rotate(0deg);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(200px) rotate(360deg);
-    }
-  }
-  
-  /* fireworks */
-  .firework-piece {
-    position: absolute;
-    width: 4px;
-    height: 10px;
-    border-radius: 2px;
-    opacity: 1;
-    transform: rotate(var(--angle)) translateY(0);
-    animation: burst 0.8s ease-out forwards;
-  }
-  @keyframes burst {
-    to {
-      opacity: 0;
-      transform: rotate(var(--angle)) translateY(var(--distance));
-    }
-  }
-  
-  /* responsividade */
-  @media (max-width: 600px) {
-    .container {
-      max-width: 90%;
-      padding: 0 0.5rem;
-    }
-    iframe {
-      height: 80px !important;
-    }
-    .photo img {
-      max-width: 90vw;
-    }
-    h1 {
-      font-size: 1.25rem;
-    }
-    #timer {
-      font-size: 1rem;
-    }
-    .heart {
-      width: 15px;
-      height: 15px;
-    }
-    .heart::before,
-    .heart::after {
-      width: 15px;
-      height: 15px;
-    }
-    .balloon {
-      width: 20px;
-      height: 30px;
-    }
-    .balloon::after {
-      bottom: -8px;
-      height: 8px;
-    }
-    .confetti-piece {
-      width: 4px;
-      height: 4px;
-    }
-    .firework-piece {
-      width: 3px;
-      height: 8px;
-    }
-    /* container da galeria com imagem central */
-.photo.gallery-container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   position: relative;
+  overflow-x: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1rem 0;
+  min-height: 100vh;
+  background: #111;
+  color: #fff;
+  font-family: -apple-system, sans-serif;
+  text-align: center;
+  padding: 1rem;
 }
 
-.photo.gallery-container img {
+/* conteúdo principal */
+.container {
+  width: 100%;
+  max-width: 400px;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
+  /* agora atrás dos corações/efeitos */
+}
+
+iframe {
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  width: 100%;
+  height: 152px;
+  overflow: hidden;
+}
+
+/* imagem redimensionável */
+.photo img {
   width: 100%;
   max-width: 400px;
   height: auto;
   border-radius: 8px;
   object-fit: contain;
+  /* mostra a imagem inteira */
   display: block;
-  margin: auto;
-  transition: opacity 0.5s ease-in-out;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  margin: 1rem 0;
 }
 
-/* botões de navegação laterais */
-.gallery-arrow {
+h1 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+#timer {
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+/* corações, balões, confetes, fogos */
+.hearts,
+.balloons,
+.confetti,
+.fireworks {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+  /* agora acima da imagem e container */
+}
+
+/* heart */
+.heart {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2.2rem;
-  color: #ffffffcc;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 3;
-  padding: 0.5rem;
-  transition: color 0.2s ease;
+  width: 20px;
+  height: 20px;
+  background: red;
+  transform: rotate(45deg);
+  animation: drop linear;
 }
 
-.gallery-arrow:hover {
-  color: #ffffff;
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+  border-radius: 50%;
 }
 
-.gallery-arrow.left {
-  left: 10px;
+.heart::before {
+  top: -10px;
+  left: 0;
 }
 
-.gallery-arrow.right {
-  right: 10px;
+.heart::after {
+  top: 0;
+  left: -10px;
 }
 
-
+@keyframes drop {
+  0% {
+    opacity: 1;
+    transform: translateY(-10px) rotate(45deg);
   }
-  
+
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) rotate(45deg);
+  }
+}
+
+/* balloons */
+.balloon {
+  position: absolute;
+  width: 30px;
+  height: 40px;
+  background: #e84393;
+  border-radius: 50%;
+  opacity: 0.9;
+  animation: floatUp ease-out forwards;
+}
+
+.balloon::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 2px;
+  height: 10px;
+  background: #ccc;
+  transform: translateX(-50%);
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) scale(0.8);
+  }
+
+  100% {
+    transform: translateY(-20vh) scale(1);
+  }
+}
+
+/* confetti */
+.confetti-piece {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  opacity: 1;
+  animation: confettiFall ease-out forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(200px) rotate(360deg);
+  }
+}
+
+/* fireworks */
+.firework-piece {
+  position: absolute;
+  width: 4px;
+  height: 10px;
+  border-radius: 2px;
+  opacity: 1;
+  transform: rotate(var(--angle)) translateY(0);
+  animation: burst 0.8s ease-out forwards;
+}
+
+@keyframes burst {
+  to {
+    opacity: 0;
+    transform: rotate(var(--angle)) translateY(var(--distance));
+  }
+}
+
+/* responsividade */
+@media (max-width: 600px) {
+  .container {
+    max-width: 90%;
+    padding: 0 0.5rem;
+  }
+
+  iframe {
+    height: 80px !important;
+  }
+
+  .photo img {
+    max-width: 90vw;
+  }
+
+  h1 {
+    font-size: 1.25rem;
+  }
+
+  #timer {
+    font-size: 1rem;
+  }
+
+  .heart {
+    width: 15px;
+    height: 15px;
+  }
+
+  .heart::before,
+  .heart::after {
+    width: 15px;
+    height: 15px;
+  }
+
+  .balloon {
+    width: 20px;
+    height: 30px;
+  }
+
+  .balloon::after {
+    bottom: -8px;
+    height: 8px;
+  }
+
+  .confetti-piece {
+    width: 4px;
+    height: 4px;
+  }
+
+  .firework-piece {
+    width: 3px;
+    height: 8px;
+  }
+
+  /* container da galeria com imagem central */
+  .photo.gallery-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+  }
+
+  .photo.gallery-container img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+    transition: opacity 0.5s ease-in-out;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  /* botões de navegação laterais */
+  .gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.2rem;
+    color: #ffffffcc;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 3;
+    padding: 0.5rem;
+    transition: color 0.2s ease;
+  }
+
+  .gallery-arrow:hover {
+    color: #ffffff;
+  }
+
+  .gallery-arrow.left {
+    left: 10px;
+  }
+
+  .gallery-arrow.right {
+    right: 10px;
+  }
+
+
+  #reveal-btn {
+    margin-top: 1rem;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: #e84393;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  #reveal-btn:hover {
+    background: #d63072;
+  }
+
+  #secret-section {
+    margin-top: 1.5rem;
+    animation: fadeIn 1s ease forwards;
+  }
+
+  .love-message {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #ffc;
+    line-height: 1.6;
+  }
+
+  /* galeria menor */
+  .small-gallery img {
+    max-width: 300px;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+}
