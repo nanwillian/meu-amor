@@ -555,6 +555,7 @@ h1 {
   gap: 10px;
   margin-bottom: 30px;
   padding: 1rem 0;
+  margin-bottom: 3rem; /* espaçamento inferior */
 }
 
 .photo-grid img {
