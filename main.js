@@ -197,7 +197,37 @@ document.addEventListener('DOMContentLoaded', () => {
       message: "Feliz aniversário maridaaaa!!! Obrigada por todos os nossos momentos, pelas risadas, pelos choros, pelas fofocas e por sempre estar presente (mesmo de longe) em todos os momentos da minha vida. Não consigo imaginar minha vida sem você! Eu te amo muito! 💕",
       image: "amigos/lais.jpeg",
       author: "Lais"
-    }
+    },
+    {
+      message: "Feliz aniversário Juju, já fazem uns 15 anos que eu comemoro a sua vida e a cada ano que passa eu me sinto mais grata por ela. Obrigada por ser a minha melhor amiga e minha irmã, não existe Ana sem a Julinha. Que seus 21 anos sejam maravilhosos como você, te amo!",
+      image: "amigos/ana.jpg",
+      author: "Ana Tunussi"
+    },
+    {
+      message: "Hoje é o dia da pessoa que ilumina a vida de todos com seu jeitinho único e coração enorme. Sou tão grata por ter você ao meu lado, nas risadas mais bobas e nos momentos mais difíceis, obrigada por tudo que você fez e faz por mim. Que seu novo ciclo venha cheio de amor, sonhos realizados e sorrisos sinceros. Você merece o mundo e eu sempre estarei aqui pra te apoiar! Te amo demais!",
+      image: "amigos/julia.jpg",
+      author: "Júlia"
+    },
+    {
+      message: "PARABÉNS JULINHA!!!! Não sou bom com texto mas saiba que desejo o melhor de tudo possível pra você eternamente, te amo muito >:D",
+      image: "amigos/Thomas.jpg",
+      author: "Thomas"
+    },
+    {
+      message: "Julinha, Juba, Maria Dieta... hoje é seu dia especial meu amor!! Sou tão grata por nossos destinos terem se cruzado, você não tem ideia do quão importante você é, do quão brilhante  e genial você é, você iluminou minha vida de maneira surpreendente, na sua dureza encontrei carinho e conforto no momento ideal e espero um dia retribuir isso! Espero que seu novo ciclo seja lindo, seja especial e que te proporcione os melhores momentos! Eu te amo jujuba",
+      image: "amigos/anab.jpg",
+      author: "Ana Brandão"
+    },
+    {
+      message: "Feliz aniversário, Bê! Que Deus te abençoe, te proteja e te ilumine sempre. Oro todos os dias pela sua vida e sou muito grata por ela. Grata por poder contar com você sempre que preciso, e pela sua amizade. Saiba que pode contar comigo sempre, sempre mesmo! Estarei sempre aqui pra você. Eu te amo muito, Bê.",
+      image: "amigos/milena.jpg",
+      author: "Bê"
+    },
+    {
+      message: "FELIZ VIDAAA!!!! Parabéns! Muitos anos de vida, que esse novo ciclo seja cheio de alegria, felicidade e realizações! Que nunca te falte motivos pra sorrir e que seu bom humor continue contagiando a todos que estão a sua volta",
+      image: "amigos/felipeg.jpg",
+      author: "Galego"
+    },
   ];
 
   function shuffle(array) {
