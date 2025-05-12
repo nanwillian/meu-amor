@@ -451,12 +451,19 @@ h1 {
     margin-bottom: 1rem;
   }
   
-  .gallery-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.8rem;
-  }
+.gallery-grid {
+  display: grid;
+  gap: 0.5rem;                   /* espaço entre imagens */
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
   
   .photo-item {
     position: relative;
