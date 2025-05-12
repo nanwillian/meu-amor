@@ -1,11 +1,58 @@
 // ======= EFEITOS INICIAIS =======
 document.addEventListener('DOMContentLoaded', () => {
-    const bgMusic = document.getElementById('bg-music');
-  bgMusic.volume = 0.2;    // ajuste de volume entre 0.0 e 1.0
-  bgMusic.play().catch(() => {
-    // em navegadores que bloqueiam autoplay, inicia no primeiro clique
-    document.body.addEventListener('click', () => bgMusic.play(), { once: true });
+  
+  const audio     = document.getElementById('bg-music');
+  const playBtn   = document.getElementById('play-btn');
+  const progressC = document.querySelector('.progress-container');
+  const progress  = document.querySelector('.progress');
+  const currentT  = document.querySelector('.time.current');
+  const durationT = document.querySelector('.time.duration');
+
+  // Tenta tocar imediatamente; se for bloqueado, tocará no primeiro clique
+  audio.volume = 0.2;
+  const playAudio = () => {
+    audio.play().catch(() => {});
+    playBtn.textContent = '⏸️';
+  };
+  playAudio();
+  document.body.addEventListener('click', playAudio, { once: true });
+
+  // Quando metadata carregar, ajusta duração
+  audio.addEventListener('loadedmetadata', () => {
+    durationT.textContent = formatTime(audio.duration);
   });
+
+  // Toggle play/pause
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play();
+      playBtn.textContent = '⏸️';
+    } else {
+      audio.pause();
+      playBtn.textContent = '▶️';
+    }
+  });
+
+  // Atualiza barra e tempo atual
+  audio.addEventListener('timeupdate', () => {
+    const pct = (audio.currentTime / audio.duration) * 100;
+    progress.style.width = pct + '%';
+    currentT.textContent = formatTime(audio.currentTime);
+  });
+
+  // Seek ao clicar na barra
+  progressC.addEventListener('click', e => {
+    const w = progressC.clientWidth;
+    const x = e.offsetX;
+    audio.currentTime = (x / w) * audio.duration;
+  });
+
+  // Função de formatação
+  function formatTime(sec) {
+    const m = Math.floor(sec / 60) || 0;
+    const s = Math.floor(sec % 60) || 0;
+    return `${m}:${s < 10 ? '0'+s : s}`;
+  }
     initialBurst();
     updateTimer();
     setInterval(updateTimer, 1000);

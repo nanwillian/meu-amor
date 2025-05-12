@@ -751,3 +751,79 @@ audio#bg-music {
     line-height: 36px !important;
   }
 }
+
+/* === AUDIO PLAYER FOFO AJUSTADO === */
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg,#ffcad4,#ffc1e3);
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(255,99,145,0.4);
+  font-family: 'Permanent Marker', cursive;
+  max-width: 340px;
+  margin: 1rem auto;
+}
+
+.track-info {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.track-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+.track-name {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* centraliza o ícone dentro do botão */
+.play-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ff9a9e;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.2rem;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: transform .2s;
+}
+.play-btn:hover {
+  transform: scale(1.1);
+}
+
+.progress-container {
+  flex: 1;
+  background: #ffe4e1;
+  height: 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  overflow: hidden;
+}
+.progress {
+  width: 0%;
+  height: 100%;
+  background: #ff6f91;
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+
+.time-info {
+  font-size: 0.8rem;
+  color: #444;
+}
+.time {
+  min-width: 2ch;
+  display: inline-block;
+  text-align: right;
+}
