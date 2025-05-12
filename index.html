@@ -15,10 +15,15 @@
   <div class="confetti"></div>
   <div class="fireworks"></div>
 
+    <!-- áudio de fundo -->
+  <audio id="bg-music" loop hidden>
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="container">
     <!-- Embed Spotify -->
     <iframe style="border-radius:12px"
-      src="https://open.spotify.com/embed/track/2afCBiru10AFckfOa49wIa?utm_source=generator&theme=0" width="100%"
+      src="https://open.spotify.com/embed/track/3JjnGLK8IxkNLvo8Lb3KOM?utm_source=generator&theme=0" width="100%"
       height="352" frameBorder="0" allowfullscreen=""
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
@@ -70,7 +75,7 @@
       </div>
       
       <section class="photo-gallery-section">
-        <h2>Memórias com quem te ama</h2>
+        <h2>Memórias com quem te ama 💖💖</h2>
         <div class="gallery-grid">
           <div class="photo-item">
             <img src="amigos-galeria/amigos_ (2).jpg" alt="Felipe" onclick="openFullscreen(this)">
@@ -83,9 +88,6 @@
           </div>
           <div class="photo-item">
             <img src="amigos-galeria/amigos_ (5).jpg" alt="Namorado Felipe" onclick="openFullscreen(this)">
-          </div>
-          <div class="photo-item">
-            <img src="amigos-galeria/amigos_ (6).jpg" alt="Felipe" onclick="openFullscreen(this)">
           </div>
           <div class="photo-item">
             <img src="amigos-galeria/amigos_ (7).jpg" alt="Felipe" onclick="openFullscreen(this)">
@@ -181,6 +183,16 @@
       </div>
     </div>
 
+    <!-- BOTÃO DA CARTA -->
+    <button id="letter-btn" style="display: none;">Chegou uma carta!! ✉️</button>
+
+    <!-- Modal da carta -->
+    <div id="letter-modal" class="hidden">
+      <div class="letter-content">
+        <img id="note-img" src="pais/pais (1).jpeg" alt="Bilhete dos pais" />
+        <img id="parents-img" src="pais/pais (2).jpeg" alt="Ela com os pais" />
+      </div>
+    </div>
   </div>
 
   <script src="main.js"></script>

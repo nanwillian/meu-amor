@@ -1,41 +1,17 @@
 /* reset e estilo base */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   background: linear-gradient(to right, #ffd1dc, #ffe4e1);
   font-family: 'Comic Sans MS', cursive, sans-serif;
-  color: #444;
-  text-align: center;
-  margin: 0;
-  padding: 1rem;
+  color: #444; text-align: center; padding: 1rem;
 }
 
 /* conteúdo principal */
-.container {
-  max-width: 500px;
-  margin: auto;
-  background: white;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+.container { max-width: 500px; margin: auto; background: white; border-radius: 16px; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
 
-button {
-  background: #ffb6c1;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #ffa6c9;
-}
+button { background: #ffb6c1; border: none; padding: 10px 20px; border-radius: 20px; font-size: 1rem; cursor: pointer; }
+button:hover { background: #ffa6c9; }
 
 iframe {
   border-radius: 8px;
@@ -200,6 +176,17 @@ h1 {
   .container {
     max-width: 90%;
     padding: 0 0.5rem;
+  }
+
+  #letter-btn {
+    position: fixed !important;
+    top: 40% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(0) !important;
+  }
+  /* quando receber a classe .show, deve escalar pra 1 */
+  #letter-btn.show {
+    transform: translate(-50%, -50%) scale(1) !important;
   }
 
   iframe {
@@ -612,4 +599,148 @@ h1 {
 
 .bottom-padding {
   height: 30px;
+}
+/* Reset básico */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: linear-gradient(to right, #ffd1dc, #ffe4e1);
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: #444;
+  text-align: center;
+  padding: 1rem;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* BOTÃO CARTA - ESTILO FOFO */
+#letter-btn {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: radial-gradient(circle at top left, #ff9a9e, #fad0c4);
+  border: 2px solid #ffe3e3;
+  box-shadow: 0 4px 15px rgba(255, 154, 158, 0.6);
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1.2rem;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  padding: 1rem 2rem;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 10;
+  overflow: hidden;
+}
+#letter-btn.show {
+  display: block;
+  transform: translate(-50%, -50%) scale(1);
+  animation: pop 0.5s ease-out forwards;
+}
+#letter-btn:hover {
+  box-shadow: 0 6px 20px rgba(255, 154, 158, 0.8);
+  animation: heartbeat 1s infinite;
+}
+
+/* esconde o elemento de áudio */
+audio#bg-music {
+  display: none;
+}
+
+
+/* BOTÃO LATERAL FIXO PEQUENO APÓS A ABERTURA */
+/* CSS: estilo para o botão depois de aberto (classe .letter-lateral) */
+#letter-btn.letter-lateral {
+  position: fixed !important;
+  bottom: 16px !important;
+  right: 16px !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;      /* remove qualquer translate */
+  width: 40px !important;          /* quadradinho */
+  height: 40px !important;
+  padding: 0 !important;
+  font-size: 24px !important;
+  line-height: 40px !important;
+  border-radius: 8px !important;
+  background: radial-gradient(circle at top left, #ff9a9e, #fad0c4) !important;
+  box-shadow: 0 4px 12px rgba(255,154,158,0.6) !important;
+  text-shadow: none !important;
+  cursor: pointer;
+  transition: none !important;
+}
+
+#letter-btn.letter-lateral:hover {
+  transform: none !important;
+  box-shadow: 0 6px 15px rgba(255, 154, 158, 0.8) !important;
+}
+
+/* MODAL CARTA */
+#letter-modal.hidden {
+  display: none;
+}
+#letter-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.6);
+  z-index: 20;
+}
+.letter-content {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  max-width: 320px;
+  animation: open-letter 0.4s ease-out forwards;
+}
+.letter-content img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+@keyframes pop {
+  0%   { transform: translate(-50%, -50%) scale(0); }
+  70%  { transform: translate(-50%, -50%) scale(1.2); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+@keyframes heartbeat {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  25%      { transform: translate(-50%, -50%) scale(1.1); }
+  50%      { transform: translate(-50%, -50%) scale(0.9); }
+  75%      { transform: translate(-50%, -50%) scale(1.1); }
+}
+@keyframes open-letter {
+  from { transform: scale(0.5) rotate(-10deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+/* Ajuste mobile */
+@media (max-width: 600px) {
+  #letter-btn {
+    top: 40% !important;
+    transform: translate(-50%, -50%) scale(0) !important;
+  }
+  #letter-btn.show {
+    transform: translate(-50%, -50%) scale(1) !important;
+  }
+  #letter-btn.letter-lateral {
+    bottom: 15px;
+    right: 15px;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 20px !important;
+    line-height: 36px !important;
+  }
 }
