@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     letterBtn.style.display = 'block';
     letterBtn.classList.add('show');
-  }, 300000);
+  }, 6000);
 
   letterBtn.addEventListener('click', () => {
     // abre o modal
