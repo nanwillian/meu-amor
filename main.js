@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ======= TIMER =======
-const startDate = new Date(2024, 9, 20, 22, 0, 0);
+const startDate = new Date(2024, 9, 20, 0, 0, 0);
 
 function updateTimer() {
     const now = new Date();
