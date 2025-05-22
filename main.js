@@ -61,28 +61,51 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ======= TIMER =======
-const startDate = new Date(2024, 9, 20, 0, 0, 0);
+const startDate = new Date(2024, 9, 22, 0, 0, 0);
 
 function updateTimer() {
     const now = new Date();
-    let diffMs = now - startDate;
-    if (diffMs < 0) {
+    if (now < startDate) {
         document.getElementById("timer").textContent = "Ainda não começou ❤️";
         return;
     }
-    const oneSecond = 1000, oneMinute = 60 * oneSecond, oneHour = 60 * oneMinute,
-          oneDay = 24 * oneHour, oneMonth = 30.44 * oneDay, oneYear = 365.25 * oneDay;
-    const years = Math.floor(diffMs / oneYear); diffMs -= years * oneYear;
-    const months = Math.floor(diffMs / oneMonth); diffMs -= months * oneMonth;
-    const days = Math.floor(diffMs / oneDay); diffMs -= days * oneDay;
-    const hours = Math.floor(diffMs / oneHour); diffMs -= hours * oneHour;
-    const minutes = Math.floor(diffMs / oneMinute); diffMs -= minutes * oneMinute;
-    const seconds = Math.floor(diffMs / oneSecond);
+
+    let years = now.getFullYear() - startDate.getFullYear();
+    let months = now.getMonth() - startDate.getMonth();
+    let days = now.getDate() - startDate.getDate();
+    let hours = now.getHours() - startDate.getHours();
+    let minutes = now.getMinutes() - startDate.getMinutes();
+    let seconds = now.getSeconds() - startDate.getSeconds();
+
+    if (seconds < 0) {
+        seconds += 60;
+        minutes--;
+    }
+    if (minutes < 0) {
+        minutes += 60;
+        hours--;
+    }
+    if (hours < 0) {
+        hours += 24;
+        days--;
+    }
+    if (days < 0) {
+        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += prevMonth.getDate();
+        months--;
+    }
+    if (months < 0) {
+        months += 12;
+        years--;
+    }
+
     const result = years >= 1
       ? `${years} ano${years > 1 ? 's' : ''}, ${months} mês${months !== 1 ? 'es' : ''}, ${days} dia${days !== 1 ? 's' : ''}, ${hours}h ${minutes}min ${seconds}s`
       : `${months} mês${months !== 1 ? 'es' : ''}, ${days} dia${days !== 1 ? 's' : ''}, ${hours}h ${minutes}min ${seconds}s`;
+
     document.getElementById("timer").textContent = result;
 }
+
 
 // ======= CORAÇÕES =======
 function createHeart() {
