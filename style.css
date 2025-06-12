@@ -827,3 +827,18 @@ audio#bg-music {
   display: inline-block;
   text-align: right;
 }
+.btn-link {
+  display: inline-block;
+  padding: 12px 20px;
+  background-color: #ff69b4;
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.btn-link:hover {
+  background-color: #ff1493;
+}
+
+
