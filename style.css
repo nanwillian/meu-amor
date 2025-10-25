@@ -29,7 +29,6 @@ button:hover { background: #ffa6c9; }
 .cta-card {
   display: flex !important;     /* força flex no <a> mesmo se algo sobrescreveu */
   flex-direction: column;
-  align-items: center;          /* centra horizontalmente */
   justify-content: center;      /* centra verticalmente */
   text-align: center;           /* textos alinhados */
   width: 100%;
