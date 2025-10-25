@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"/>
+  <title>365 motivos para te amar 💖</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ===== Ajustes Mobile-First para esta página ===== */
+    :root{
+      --pink:#ff69b4;
+      --pink-2:#ffa6c9;
+      --bg:#fffafc;
+      --ink:#3a2a31;
+      --ok:#2ecc71;
+      --muted:#6b5b62;
+      --card:#ffffff;
+      --border:#ffd9e6;
+    }
+    body { background: var(--bg); color: var(--ink); }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 12px 12px 88px; }
+
+    /* Header + progresso */
+    .header { margin: 10px 0 2px; font-size: 1.4rem; }
+    .sub { color:#a04c74; margin-bottom:10px; }
+    .progressbar {
+      height: 10px; background: #ffeaf3; border-radius: 999px; overflow: hidden; margin: 8px 0 14px;
+    }
+    .progressbar > i { display:block; height:100%; width:0%; background: var(--pink); transition: width .25s ease; }
+
+    /* Card destaque */
+    .card {
+      background: var(--card); border:1px solid var(--border);
+      border-radius:16px; padding:16px; box-shadow:0 6px 16px rgba(0,0,0,.06);
+    }
+    .badge {
+      display:inline-flex; align-items:center; gap:6px; font-size:.92rem; font-weight:700;
+      background: var(--pink); color:#fff; border-radius:999px; padding:6px 12px; margin-bottom:8px;
+    }
+    .badge.read { background: var(--ok); }
+    .motivetext { font-size:1.15rem; line-height:1.55; margin-top:6px; }
+    .read-state {
+      display:flex; align-items:center; gap:8px; margin-top:12px; color: var(--muted);
+    }
+
+    /* Botão grande de marcar lido */
+    .read-btn {
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      width:100%; margin-top:10px; padding:14px 16px; border-radius:14px; border:none; font-weight:800;
+      background: #ffe4ef; color:#a04c74;
+    }
+    .read-btn.active { background: #d9f7e7; color:#107a43; }
+    .read-btn i { font-style:normal; font-weight:900; }
+
+    /* Grid (opcional “mostrar todos”) */
+    .toggle-row { display:flex; justify-content:center; margin: 10px 0 8px; }
+    .toggle-row button { padding:10px 14px; border-radius:999px; border:1px solid var(--border); background:#fff; }
+    .grid {
+      display:none; grid-template-columns: repeat(auto-fill,minmax(160px,1fr));
+      gap:10px; margin-top:8px;
+    }
+    .grid .gc {
+      position: relative;
+      background: #fff; border:1px solid var(--border); border-radius:12px; padding:12px; min-height:96px;
+      box-shadow:0 3px 12px rgba(0,0,0,.04);
+    }
+    .grid .mini-badge {
+      position:absolute; top:8px; right:8px; font-size:.75rem; background:#ffd1e4; color:#7a3956; padding:3px 8px; border-radius:999px;
+    }
+    .grid .gc.read { border-color:#bdf2d5; }
+    .grid .gc.read .mini-badge { background:#bdf2d5; color:#106a3b; }
+    .grid .gc .mini-toggle {
+      margin-top:8px; display:inline-flex; align-items:center; gap:6px; font-size:.9rem; color:#23543f;
+      background:#e8fff3; padding:6px 10px; border-radius:999px; border:1px solid #c9f6df;
+    }
+
+    /* Navegação fixa inferior (mobile) */
+    .bottom-nav {
+      position: fixed; left: 0; right: 0; bottom: 0; padding: 10px 12px calc(12px + env(safe-area-inset-bottom));
+      background: rgba(255,255,255,.8); backdrop-filter: blur(8px); border-top:1px solid var(--border);
+      display:flex; gap:10px; z-index: 10;
+    }
+    .bottom-nav button {
+      flex:1; padding:14px 10px; border-radius:12px; border:1px solid var(--border); background:#fff; font-weight:700;
+    }
+    .bottom-nav button.primary { background: var(--pink); color:#fff; border-color: var(--pink); }
+    .hint { font-size:.92rem; color:#a04c74; margin-top:6px; }
+
+    /* Toques extras */
+    .muted { color: var(--muted); }
+    @media (min-width: 640px){
+      .header { font-size:1.8rem; }
+    }
+
+    /* Confetti simples */
+    .confetti-piece{
+      position:fixed; width:8px; height:8px; opacity:.9; transform: translateY(-20px);
+      animation: fall linear forwards;
+    }
+    @keyframes fall {
+      to { transform: translateY(110vh) rotate(720deg); opacity: .5; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Reaproveita seus efeitos globais se existirem no style.css -->
+  <div class="hearts"></div>
+  <div class="balloons"></div>
+  <div class="confetti"></div>
+  <div class="fireworks"></div>
+
+  <div class="wrap">
+    <h1 class="header">💗 365 motivos para te amar</h1>
+    <p class="sub">Um motivo por dia — simples, direto e do jeitinho que é a nossa cara!</p>
+
+    <!-- barra de progresso -->
+    <div class="progressbar" aria-label="Progresso de leitura">
+      <i id="progressBar"></i>
+    </div>
+    <div class="muted" style="margin-bottom:10px;">
+      Progresso: <b id="progressText">0/365</b>
+    </div>
+
+    <!-- destaque -->
+    <div id="highlight" class="card" aria-live="polite">
+      <span id="badge" class="badge">#1</span>
+      <div id="text" class="motivetext">Carregando…</div>
+
+      <div class="read-state">
+        <span id="readLabel" class="muted">Ainda não lido</span>
+      </div>
+      <button id="btnRead" class="read-btn" aria-pressed="false">
+        <i>✓</i> Marcar como lido
+      </button>
+    </div>
+
+    <!-- toggle Mostrar todos -->
+    <div class="toggle-row">
+      <button id="btnToggleGrid">Mostrar todos (grid)</button>
+    </div>
+
+    <!-- grade -->
+    <div id="grid" class="grid" aria-hidden="true"></div>
+
+    <p class="hint">Dica: deslize para a direita/esquerda no cartão para ver anterior/próximo 😉</p>
+
+    <div style="margin-top:10px">
+      <a href="index.html" class="btn-link">← Voltar</a>
+    </div>
+  </div>
+  
+<!-- Botão para o bônus: Quadro do casal -->
+<div style="margin: 12px 0;">
+  <a href="couple-board.html" class="btn-large" aria-label="Abrir quadro do casal">
+    💑 Quadro do casal (bônus)
+  </a>
+</div>
+
+  <!-- Navegação fixa inferior -->
+  <div class="bottom-nav">
+    <button id="btnPrev">◀️ Anterior</button>
+    <button id="btnToday" class="primary">Motivo de hoje 🎁</button>
+    <button id="btnNext">Próximo ▶️</button>
+  </div>
+
+  <script>
+    /* ===== Confetti rápido ===== */
+    function confettiBurst(x = window.innerWidth/2, y = window.innerHeight/3) {
+      const colors = ['#e74c3c','#f1c40f','#2ecc71','#3498db','#9b59b6'];
+      const cont = document.querySelector('.confetti');
+      for (let i=0;i<24;i++){
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+        piece.style.left = (x + (Math.random()*160 - 80)) + 'px';
+        piece.style.top  = (y + (Math.random()*60  - 30)) + 'px';
+        piece.style.animationDuration = (1.6 + Math.random()) + 's';
+        cont.appendChild(piece);
+        setTimeout(()=>piece.remove(), 2400);
+      }
+    }
+
+    // Mesmo startDate que você usa no site (ajuste se precisar)
+    const START_DATE = new Date(2024, 9, 22, 0, 0, 0); // 22/10/2024 (mês 9 = outubro)
+
+    // Curadas + auto-complete até 365
+    const curated = [
+  "Porque seu sorriso acende tudo ao redor.",
+  "Porque seu abraço sempre parece casa.",
+  "Porque você faz os dias comuns ficarem especiais.",
+  "Porque suas risadas são meu som favorito.",
+  "Porque até seu silêncio me entende.",
+  "Porque você me inspira a ser melhor.",
+  "Porque dividir batata frita com você é fácil.",
+  "Porque seu cheirinho ficou no meu moletom.",
+  "Porque você acredita em mim quando eu vacilo.",
+  "Porque seu jeito bobo combina com o meu.",
+  "Porque você é meu ponto de paz.",
+  "Porque até no caos a gente se encontra.",
+  "Porque seu beijo pausa o mundo.",
+  "Porque você cuida de mim sem perceber.",
+  "Porque seu olhar me derruba (do melhor jeito).",
+  "Porque você dança na sala comigo.",
+  "Porque viajar com você é a melhor aventura.",
+  "Porque até fila de mercado vira passeio.",
+  "Porque seu ‘bom dia’ muda meu dia.",
+  "Porque temos nossas piadas internas.",
+  "Porque suas manias viraram minhas também.",
+  "Porque saudade de você é doce (e dói).",
+  "Porque te vejo no meu futuro.",
+  "Porque você repara nos detalhes.",
+  "Porque seu carinho cura qualquer coisa.",
+  "Porque conversas longas com você voam.",
+  "Porque você fica linda de qualquer jeito.",
+  "Porque você me puxa para um mundo mais leve.",
+  "Porque sua força me ensina todo dia.",
+  "Porque seus sonhos também viraram meus.",
+  "Porque nossas mãos se procuram sem pensar.",
+  "Porque te ouvir é meu hobby favorito.",
+  "Porque você sabe ser colo e impulso.",
+  "Porque você ficou até quando era difícil.",
+  "Porque chorar com você é seguro.",
+  "Porque você me escolhe — e eu te escolho de volta.",
+  "Porque sua voz acalma minha ansiedade.",
+  "Porque seu jeito me lembra que o amor é simples.",
+  "Porque você faz café do seu jeitinho pra mim.",
+  "Porque nossas fotos têm risos de verdade.",
+  "Porque você é paciente com as minhas loucuras.",
+  "Porque você tem a melhor careta do mundo.",
+  "Porque maratonar série com você é melhor que cinema.",
+  "Porque seus recadinhos mudam meu humor.",
+  "Porque você sabe o que dizer nas horas certas.",
+  "Porque você me faz acreditar no sempre.",
+  "Porque te abraçar é como desligar o mundo.",
+  "Porque nossos planos dão frio na barriga.",
+  "Porque você me acha bonito do meu jeito.",
+  "Porque sua inteligência me encanta.",
+  "Porque você me apresenta músicas novas.",
+  "Porque sua sinceridade é rara.",
+  "Porque cozinhar com você é bagunça boa.",
+  "Porque dançar na cozinha virou tradição.",
+  "Porque sua foto é meu papel de parede mental.",
+  "Porque sua paz puxa a minha paz.",
+  "Porque você me olha como ninguém.",
+  "Porque comigo você é você — e isso é lindo.",
+  "Porque seu cuidado com quem ama me inspira.",
+  "Porque até mensagem simples sua é abraço.",
+  "Porque você é meu porto e meu mar.",
+  "Porque acordar do seu lado é meu lugar favorito.",
+  "Porque você me faz querer ser gentil com o mundo.",
+  "Porque a gente cabe nas mesmas bobeiras.",
+  "Porque nossa história é minha preferida.",
+  "Porque você não solta a minha mão.",
+  "Porque você é minha certeza tranquila.",
+  "Porque seu nome virou minha prece.",
+  "Porque você é o ‘final feliz’ que parecia ficção.",
+  "Porque com você, eu sou versão premium de mim.",
+  "Porque te ver feliz é meu objetivo diário.",
+  "Porque a gente dá risada no meio da briga.",
+  "Porque papo profundo + besteira = a gente.",
+  "Porque você é abrigo no olho do furacão.",
+  "Porque te admirar nunca cansa.",
+  "Porque sua bagunça combina com a minha.",
+  "Porque você tem brilho próprio.",
+  "Porque te imaginar velhinha comigo me faz sorrir.",
+  "Porque você é lar — e viagem.",
+  "Porque você fez o tempo passar mais bonito.",
+  "Porque 1 ano foi só o prólogo do livro inteiro.",
+  "Porque teu jeito sério me dá forças no improviso, e eu penso: que sorte a minha.",
+  "Porque teu cuidado me deixa em paz na fila do mercado, e eu quero mais um abraço.",
+  "Porque tua sensibilidade me faz acreditar na nossa playlist, e as horas correm felizes.",
+  "Porque tua presença calma me deixa em paz no sofá da sala, e eu sei que vai dar certo.",
+  "Porque teu abraço faz o tempo voar quando você me olha daquele jeito, e as horas correm felizes.",
+  "Porque teu jeito sério me abraça por dentro quando a semana pesa, e eu tenho certeza de nós.",
+  "Porque teus planos me dá vontade de sonhar quando o mundo parece grande demais, e a vida fica doce.",
+  "Porque tua risadinha me acalma no final do dia, e eu quero pausar o tempo.",
+  "Porque tua mania de arrumar tudo me dá paz quando o sono chega, e eu quero mais um abraço.",
+  "Porque tua inteligência ilumina a casa no sofá da sala, e eu só consigo agradecer.",
+  "Porque teu cuidado me abraça por dentro no trânsito, e eu me apaixono de novo.",
+  "Porque tua paciência me faz melhor nas mensagens inesperadas, e meu coração sorri.",
+  "Porque teu jeitinho me deixa em paz quando te vejo chegando, e eu penso: que sorte a minha.",
+  "Porque teu cheirinho me acolhe no trânsito, e eu respiro aliviado.",
+  "Porque teu jeitinho carinhoso me ensina no final do dia, e eu me apaixono de novo.",
+  "Porque teu sorriso me lembra quem sou quando o mundo parece grande demais, e eu quero mais um abraço.",
+  "Porque teu beijo me acolhe quando a casa tá silenciosa, e eu respiro aliviado.",
+  "Porque tua generosidade me acalma quando tudo parece difícil, e fico torcendo pra nunca acabar.",
+  "Porque teus conselhos me completa nas manhãs de domingo, e eu lembro que amor é simples.",
+  "Porque teu abraço apertado me faz suspirar no abraço de despedida, e tudo faz sentido.",
+  "Porque tua presença calma me abraça por dentro no primeiro gole de café, e a vida fica doce.",
+  "Porque tua criatividade me faz acreditar nas manhãs de domingo, e eu penso: que sorte a minha.",
+  "Porque tua bagunça boa vira poesia quando tudo parece difícil, e eu tenho certeza de nós.",
+  "Porque tua paciência deixa tudo mais leve no meio do caos, e eu respiro aliviado.",
+  "Porque teu abraço me inspira no sofá da sala, e eu tenho certeza de nós.",
+  "Porque teu jeito sério ilumina a casa quando a gente cozinha junto, e eu tenho certeza de nós.",
+  "Porque tua presença calma me ensina quando ouço tua voz, e as horas correm felizes.",
+  "Porque tua mão na minha me dá esperança quando você me olha daquele jeito, e eu só consigo agradecer.",
+  "Porque tua fé me acolhe no caminho de casa, e eu me apaixono de novo.",
+  "Porque teu beijo me faz melhor na hora do filme, e eu só consigo agradecer.",
+  "Porque teu jeito bobo me aquece o peito no sofá da sala, e eu respiro aliviado.",
+  "Porque teu colo me faz acreditar quando a noite cai, e eu quero mais um abraço.",
+  "Porque tua companhia me acalma a mente quando o sol bate na janela, e as horas correm felizes.",
+  "Porque teus olhos me dá coragem quando a casa tá silenciosa, e tudo faz sentido.",
+  "Porque tua bagunça boa me puxa pra frente quando a gente cozinha junto, e as horas correm felizes.",
+  "Porque tua doçura me dá paz quando os planos mudam, e a vida fica doce.",
+  "Porque tua paciência me dá vontade de dançar quando a noite cai, e fico torcendo pra nunca acabar.",
+  "Porque teus planos me dá paz no caminho de casa, e eu me sinto em casa.",
+  "Porque tua risada me faz sorrir quando a gente ri por nada, e eu só consigo agradecer.",
+  "Porque teu brilho nos olhos vira poesia nas nossas fotos tortas, e tudo faz sentido.",
+  "Porque tua fé me faz sorrir quando o mundo parece grande demais, e eu só consigo agradecer.",
+  "Porque teu bom humor me faz querer ficar no trânsito, e eu só consigo agradecer.",
+  "Porque tua coragem me dá coragem quando a semana pesa, e eu me apaixono de novo.",
+  "Porque teus conselhos me abraça por dentro quando ouço tua voz, e as horas correm felizes.",
+  "Porque tua coragem me faz sorrir no final do dia, e eu me sinto em casa.",
+  "Porque teu toque me deixa em paz no trânsito, e eu acredito no sempre.",
+  "Porque tua companhia me dá coragem na nossa playlist, e eu só consigo agradecer.",
+  "Porque tua mão na minha me acalma no café da tarde, e eu quero pausar o tempo.",
+  "Porque tua presença calma me dá forças quando te vejo chegando, e eu quero mais um abraço.",
+  "Porque teu abraço ilumina a casa no primeiro gole de café, e a vida fica doce.",
+  "Porque tua curiosidade ilumina a casa no meio do caos, e eu acredito no sempre.",
+  "Porque tua mão na minha me deixa em paz quando chove lá fora, e meu coração sorri.",
+  "Porque teu cheirinho me enche de orgulho no café da tarde, e eu sei que vai dar certo.",
+  "Porque tua risada me aquece o peito no abraço de despedida, e as horas correm felizes.",
+  "Porque teu brilho nos olhos me acolhe no meio do caos, e eu me sinto em casa.",
+  "Porque tua paciência me abraça por dentro quando o mundo parece grande demais, e eu lembro que amor é simples.",
+  "Porque tua bagunça boa me faz querer ficar no final do dia, e eu lembro que amor é simples.",
+  "Porque teu brilho nos olhos me puxa pra frente quando a gente ri por nada, e eu lembro que amor é simples.",
+  "Porque teu jeito sério me inspira no meio do caos, e eu penso: que sorte a minha.",
+  "Porque teu abraço apertado vira poesia no café da tarde, e meu coração sorri.",
+  "Porque teu jeito sério me faz melhor quando a casa tá silenciosa, e eu respiro aliviado.",
+  "Porque teu abraço apertado me faz sorrir no final do dia, e eu quero mais um abraço.",
+  "Porque tua paz me faz sorrir quando o sol bate na janela, e eu penso: que sorte a minha.",
+  "Porque teu otimismo me dá vontade de dançar no meio do caos, e eu sei que vai dar certo.",
+  "Porque teu brilho nos olhos me acolhe na nossa playlist, e eu penso: que sorte a minha.",
+  "Porque tua risadinha me inspira nas viagens que a gente planeja, e o mundo parece mais bonito.",
+  "Porque tua risadinha vira poesia no improviso, e tudo faz sentido.",
+  "Porque tua fé me deixa em paz no primeiro gole de café, e as horas correm felizes.",
+  "Porque tua risadinha me completa quando te vejo chegando, e eu encontro repouso.",
+  "Porque teu abraço me faz querer ficar nas viagens que a gente planeja, e as horas correm felizes.",
+  "Porque tua coragem vira poesia quando o sol bate na janela, e eu quero pausar o tempo.",
+  "Porque teus olhos me acalma quando a gente cozinha junto, e eu sei que vai dar certo.",
+  "Porque teu olhar me dá esperança na nossa playlist, e eu acredito no sempre.",
+  "Porque teu jeitinho carinhoso me acalma quando os planos mudam, e a vida fica doce.",
+  "Porque teus conselhos me dá vontade de sonhar quando a gente cozinha junto, e eu sei que vai dar certo.",
+  "Porque tua companhia me arranca risos quando o mundo parece grande demais, e eu lembro que amor é simples.",
+  "Porque teu beijo me dá forças na hora do filme, e fico torcendo pra nunca acabar.",
+  "Porque tua paz me acolhe quando o mundo parece grande demais, e eu encontro repouso.",
+  "Porque tua presença me acalma nas nossas caminhadas, e eu encontro repouso.",
+  "Porque teu cheirinho me puxa pra frente nas viagens que a gente planeja, e eu me sinto em casa.",
+  "Porque teu colo me dá paz quando o sol bate na janela, e o mundo parece mais bonito.",
+  "Porque tua generosidade me faz suspirar quando o sol bate na janela, e eu respiro aliviado.",
+  "Porque tua inteligência faz o tempo voar no meio do caos, e as horas correm felizes.",
+  "Porque tua voz vira poesia quando te vejo chegando, e eu lembro que amor é simples.",
+  "Porque tua risadinha me enche de orgulho no meio do caos, e eu quero pausar o tempo.",
+  "Porque tua mão na minha me puxa pra frente quando chove lá fora, e eu só consigo agradecer.",
+  "Porque tua força me abraça por dentro quando o sol bate na janela, e meu coração sorri.",
+  "Porque tua força me aquece o peito quando os planos mudam, e meu coração sorri.",
+  "Porque tua bagunça boa me faz querer ficar nas nossas caminhadas, e eu só consigo agradecer.",
+  "Porque tua força me enche de orgulho nas manhãs de domingo, e eu acredito no sempre.",
+  "Porque tua generosidade me dá vontade de sonhar quando o mundo parece grande demais, e tudo faz sentido.",
+  "Porque teu cuidado vira poesia no sofá da sala, e eu respiro aliviado.",
+  "Porque tua curiosidade me lembra quem sou quando os planos mudam, e eu tenho certeza de nós.",
+  "Porque teu toque me dá paz quando o sol bate na janela, e eu só consigo agradecer.",
+  "Porque tua curiosidade me acalma no caminho de casa, e eu acredito no sempre.",
+  "Porque tua generosidade me dá coragem no improviso, e tudo faz sentido.",
+  "Porque teu apoio me abraça por dentro no final do dia, e eu encontro repouso.",
+  "Porque teus sonhos me acolhe no meio do caos, e as horas correm felizes.",
+  "Porque teus conselhos me acalma a mente quando você me olha daquele jeito, e tudo faz sentido.",
+  "Porque tua fé transforma dias comuns no caminho de casa, e eu só consigo agradecer.",
+  "Porque tua presença me acolhe no meio do caos, e eu penso: que sorte a minha.",
+  "Porque tua mão na minha ilumina a casa no abraço de despedida, e a vida fica doce.",
+  "Porque teu cuidado me enche de orgulho quando chove lá fora, e eu lembro que amor é simples.",
+  "Porque tua sinceridade me dá coragem nas mensagens inesperadas, e as horas correm felizes.",
+  "Porque teus sonhos me inspira quando ouço tua voz, e eu me sinto em casa.",
+  "Porque teu olhar me acalma nas manhãs de domingo, e a vida fica doce.",
+  "Porque tua inteligência me arranca risos quando te vejo chegando, e eu lembro que amor é simples.",
+  "Porque tua mão na minha me completa quando tudo parece difícil, e eu acredito no sempre.",
+  "Porque teu colo me dá coragem nas manhãs de domingo, e eu me sinto em casa.",
+  "Porque tua bagunça boa me dá coragem no abraço de despedida, e eu acredito no sempre.",
+  "Porque teu apoio me acalma a mente na hora do filme, e eu me sinto em casa.",
+  "Porque teu brilho nos olhos vira poesia nas viagens que a gente planeja, e eu sei que vai dar certo.",
+  "Porque teu otimismo me faz acreditar quando a casa tá silenciosa, e eu quero mais um abraço.",
+  "Porque teu toque me acalma a mente na hora do filme, e eu respiro aliviado.",
+  "Porque teu cheirinho me faz querer ficar quando a noite cai, e as horas correm felizes.",
+  "Porque teu jeitinho me aquece o peito na nossa playlist, e eu encontro repouso.",
+  "Porque tua risada me aquece o peito no abraço de despedida, e eu lembro que amor é simples.",
+  "Porque tua bagunça boa me deixa em paz quando os planos mudam, e tudo faz sentido.",
+  "Porque tua bagunça boa me abraça por dentro nas mensagens inesperadas, e as horas correm felizes.",
+  "Porque teu otimismo faz o tempo voar quando a semana pesa, e as horas correm felizes.",
+  "Porque teu coração gigante ilumina a casa nas manhãs de domingo, e eu respiro aliviado.",
+  "Porque teu jeitinho me lembra quem sou quando a noite cai, e eu quero mais um abraço.",
+  "Porque tua paciência faz o tempo voar no abraço de despedida, e eu tenho certeza de nós.",
+  "Porque teu jeito sério me puxa pra frente no meio do caos, e eu lembro que amor é simples.",
+  "Porque teu brilho nos olhos me faz acreditar quando o mundo parece grande demais, e eu tenho certeza de nós.",
+  "Porque teu otimismo me enche de orgulho na fila do mercado, e eu respiro aliviado.",
+  "Porque teu sorriso me lembra quem sou quando a casa tá silenciosa, e eu penso: que sorte a minha.",
+  "Porque teu brilho nos olhos me faz sorrir quando o sono chega, e eu lembro que amor é simples.",
+  "Porque tua paz me ensina no café da tarde, e o mundo parece mais bonito.",
+  "Porque tua doçura ilumina a casa no abraço de despedida, e eu lembro que amor é simples.",
+  "Porque tua presença calma me inspira no sofá da sala, e eu me apaixono de novo.",
+  "Porque teu colo me dá esperança nas nossas fotos tortas, e o mundo parece mais bonito.",
+  "Porque tua presença me arranca risos na nossa playlist, e eu quero pausar o tempo.",
+  "Porque tua mania de arrumar tudo me faz querer ficar nas manhãs de domingo, e fico torcendo pra nunca acabar.",
+  "Porque tua leveza me dá vontade de dançar no sofá da sala, e eu acredito no sempre.",
+  "Porque teu jeito bobo me arranca risos nas nossas caminhadas, e tudo faz sentido.",
+  "Porque teu coração gigante me faz melhor no trânsito, e eu sei que vai dar certo.",
+  "Porque teu toque me ensina quando a gente ri por nada, e fico torcendo pra nunca acabar.",
+  "Porque tua curiosidade deixa tudo mais leve no sofá da sala, e as horas correm felizes.",
+  "Porque teu carinho deixa tudo mais leve quando o mundo parece grande demais, e eu me apaixono de novo.",
+  "Porque teus sonhos me dá paz no sofá da sala, e o mundo parece mais bonito.",
+  "Porque tua força me lembra quem sou quando a gente cozinha junto, e eu sei que vai dar certo.",
+  "Porque tua companhia me inspira quando te vejo chegando, e eu penso: que sorte a minha.",
+  "Porque teu cuidado me acolhe quando o sol bate na janela, e meu coração sorri.",
+  "Porque tua companhia me completa quando a noite cai, e a vida fica doce.",
+  "Porque tua sinceridade ilumina a casa no meio do caos, e eu encontro repouso.",
+  "Porque tua voz me puxa pra frente quando a semana pesa, e eu tenho certeza de nós.",
+  "Porque teu otimismo me faz sorrir quando a gente ri por nada, e eu respiro aliviado.",
+  "Porque teu abraço me arranca risos quando chove lá fora, e eu acredito no sempre.",
+  "Porque teu colo me enche de orgulho nas viagens que a gente planeja, e eu encontro repouso.",
+  "Porque tua força me dá paz nas manhãs de domingo, e eu me apaixono de novo.",
+  "Porque tua inteligência me ensina quando a casa tá silenciosa, e eu quero pausar o tempo.",
+  "Porque teu jeitinho deixa tudo mais leve quando a noite cai, e eu respiro aliviado.",
+  "Porque tua mão na minha deixa tudo mais leve na hora do filme, e eu lembro que amor é simples.",
+  "Porque tua coragem me enche de orgulho quando os planos mudam, e eu acredito no sempre.",
+  "Porque teu bom humor me faz melhor quando o sol bate na janela, e a vida fica doce.",
+  "Porque tua voz me puxa pra frente nas nossas caminhadas, e eu sei que vai dar certo.",
+  "Porque tua sensibilidade me leva pra perto quando o sono chega, e eu lembro que amor é simples.",
+  "Porque tua risada me acalma nas viagens que a gente planeja, e eu lembro que amor é simples.",
+  "Porque tua curiosidade vira poesia quando a casa tá silenciosa, e eu me sinto em casa.",
+  "Porque teu abraço apertado me arranca risos quando a gente ri por nada, e eu encontro repouso.",
+  "Porque teu jeito sério me deixa em paz nas nossas caminhadas, e eu me sinto em casa.",
+  "Porque tua força me faz acreditar quando a gente cozinha junto, e tudo faz sentido.",
+  "Porque tua presença calma me inspira nas viagens que a gente planeja, e o mundo parece mais bonito.",
+  "Porque tua mania de arrumar tudo vira poesia quando o mundo parece grande demais, e a vida fica doce.",
+  "Porque teus olhos me faz suspirar quando o sol bate na janela, e eu quero pausar o tempo.",
+  "Porque tua paciência faz o tempo voar na hora do filme, e eu acredito no sempre.",
+  "Porque tua coragem me abraça por dentro no final do dia, e fico torcendo pra nunca acabar.",
+  "Porque teu coração gigante me dá vontade de dançar quando o sono chega, e fico torcendo pra nunca acabar.",
+  "Porque teu colo me puxa pra frente quando a noite cai, e tudo faz sentido.",
+  "Porque teu toque me faz melhor nas nossas caminhadas, e o mundo parece mais bonito.",
+  "Porque teu apoio me lembra quem sou no meio do caos, e eu quero pausar o tempo.",
+  "Porque tua bagunça boa me aquece o peito no meio do caos, e eu quero pausar o tempo.",
+  "Porque teu apoio me abraça por dentro no improviso, e tudo faz sentido.",
+  "Porque tua leveza me acalma a mente no sofá da sala, e eu encontro repouso.",
+  "Porque teu cuidado me enche de orgulho quando a gente ri por nada, e eu acredito no sempre.",
+  "Porque tua presença calma me dá vontade de sonhar quando a noite cai, e fico torcendo pra nunca acabar.",
+  "Porque tua mania de arrumar tudo me acalma a mente quando o sono chega, e eu respiro aliviado.",
+  "Porque teus conselhos me acolhe quando a casa tá silenciosa, e eu sei que vai dar certo.",
+  "Porque teus conselhos me dá forças quando o mundo parece grande demais, e eu me apaixono de novo.",
+  "Porque tua presença calma vira poesia no final do dia, e eu só consigo agradecer.",
+  "Porque tua paciência faz o tempo voar quando a gente cozinha junto, e eu lembro que amor é simples.",
+  "Porque tua sinceridade vira poesia quando o sono chega, e eu encontro repouso.",
+  "Porque teu cuidado me ensina quando a semana pesa, e fico torcendo pra nunca acabar.",
+  "Porque tua leveza me dá esperança quando a gente ri por nada, e o mundo parece mais bonito.",
+  "Porque tua fé faz o tempo voar quando a gente cozinha junto, e eu quero pausar o tempo.",
+  "Porque teu toque me faz querer ficar na hora do filme, e as horas correm felizes.",
+  "Porque teu olhar me faz querer ficar no abraço de despedida, e eu quero pausar o tempo.",
+  "Porque teu toque me enche de orgulho quando você me olha daquele jeito, e eu tenho certeza de nós.",
+  "Porque teu jeito bobo me acalma quando o sono chega, e as horas correm felizes.",
+  "Porque teu coração gigante me faz querer ficar no trânsito, e eu só consigo agradecer.",
+  "Porque teu cuidado me aquece o peito na nossa playlist, e eu me apaixono de novo.",
+  "Porque teu cheirinho me abraça por dentro nas nossas fotos tortas, e eu lembro que amor é simples.",
+  "Porque teu beijo ilumina a casa quando a gente cozinha junto, e tudo faz sentido.",
+  "Porque teus sonhos deixa tudo mais leve quando o sono chega, e meu coração sorri.",
+  "Porque teu abraço apertado me lembra quem sou quando o sono chega, e as horas correm felizes.",
+  "Porque teu jeitinho me acalma quando chove lá fora, e eu quero pausar o tempo.",
+  "Porque tua risada deixa tudo mais leve no caminho de casa, e eu encontro repouso.",
+  "Porque tua companhia deixa tudo mais leve nas mensagens inesperadas, e eu lembro que amor é simples.",
+  "Porque tua voz me inspira nas nossas fotos tortas, e eu quero mais um abraço.",
+  "Porque tua generosidade deixa tudo mais leve nas mensagens inesperadas, e eu sei que vai dar certo.",
+  "Porque teu cheirinho me lembra quem sou quando você me olha daquele jeito, e eu penso: que sorte a minha.",
+  "Porque teus sonhos me dá esperança quando chove lá fora, e tudo faz sentido.",
+  "Porque teu coração gigante me acolhe quando você me olha daquele jeito, e eu encontro repouso.",
+  "Porque teu cuidado com os detalhes me dá forças nas nossas caminhadas, e eu lembro que amor é simples.",
+  "Porque tua criatividade me puxa pra frente quando a gente ri por nada, e as horas correm felizes.",
+  "Porque teu sorriso me dá esperança no primeiro gole de café, e a vida fica doce.",
+  "Porque tua mania de arrumar tudo me faz sorrir no abraço de despedida, e eu me apaixono de novo.",
+  "Porque tua mão na minha me acolhe quando o sono chega, e eu respiro aliviado.",
+  "Porque teu cheirinho me deixa em paz quando a gente cozinha junto, e eu penso: que sorte a minha.",
+  "Porque teu cuidado me dá vontade de dançar nas nossas caminhadas, e eu me apaixono de novo.",
+  "Porque teus sonhos me deixa em paz no sofá da sala, e fico torcendo pra nunca acabar.",
+  "Porque tua criatividade me dá paz quando ouço tua voz, e eu quero mais um abraço.",
+  "Porque tua leveza me completa no final do dia, e eu me apaixono de novo.",
+  "Porque teu olhar me dá esperança no primeiro gole de café, e eu penso: que sorte a minha.",
+  "Porque tua presença calma me acolhe no improviso, e a vida fica doce.",
+  "Porque tua voz me puxa pra frente nas manhãs de domingo, e eu encontro repouso.",
+  "Porque teu coração gigante me acalma no sofá da sala, e eu me sinto em casa.",
+  "Porque tua mão na minha me dá esperança nas viagens que a gente planeja, e eu sei que vai dar certo.",
+  "Porque teu apoio deixa tudo mais leve nas manhãs de domingo, e eu me apaixono de novo.",
+  "Porque teu beijo deixa tudo mais leve no caminho de casa, e tudo faz sentido.",
+  "Porque teu otimismo me faz suspirar quando ouço tua voz, e eu penso: que sorte a minha.",
+  "Porque tua inteligência me dá esperança no trânsito, e eu acredito no sempre.",
+  "Porque tua mania de arrumar tudo me dá esperança quando os planos mudam, e eu respiro aliviado.",
+  "Porque teu senso de humor me abraça por dentro quando os planos mudam, e eu acredito no sempre.",
+  "Porque tua paz me faz sorrir quando a casa tá silenciosa, e eu encontro repouso.",
+  "Porque teus conselhos me lembra quem sou no improviso, e eu só consigo agradecer.",
+  "Porque tua sinceridade me deixa em paz na nossa playlist, e eu sei que vai dar certo.",
+  "Porque tua voz me dá coragem na fila do mercado, e eu penso: que sorte a minha.",
+  "Porque tua coragem vira poesia quando te vejo chegando, e eu penso: que sorte a minha.",
+  "Porque teu toque me dá vontade de sonhar no final do dia, e eu respiro aliviado.",
+  "Porque tua sinceridade me dá vontade de dançar quando o mundo parece grande demais, e eu penso: que sorte a minha.",
+  "Porque tua força me dá vontade de dançar quando o sol bate na janela, e eu me apaixono de novo.",
+  "Porque teu bom humor ilumina a casa na fila do mercado, e eu respiro aliviado.",
+  "Porque tua curiosidade transforma dias comuns na nossa playlist, e meu coração sorri.",
+  "Porque tua presença calma me deixa em paz quando tudo parece difícil, e eu sei que vai dar certo.",
+  "Porque teu cuidado me faz suspirar quando o mundo parece grande demais, e as horas correm felizes.",
+  "Porque teu cuidado com os detalhes me dá forças no improviso, e a vida fica doce.",
+  "Porque tua presença me dá vontade de dançar no final do dia, e eu tenho certeza de nós.",
+  "Porque tua paz me ensina no caminho de casa, e eu respiro aliviado.",
+  "Porque teu cuidado com os detalhes me abraça por dentro quando a semana pesa, e o mundo parece mais bonito.",
+  "Porque tua curiosidade me lembra quem sou quando você me olha daquele jeito, e eu me apaixono de novo.",
+  "Porque teus planos me acolhe no café da tarde, e eu lembro que amor é simples.",
+  "Porque tua mania de arrumar tudo me aquece o peito quando você me olha daquele jeito, e eu acredito no sempre.",
+  "Porque teu brilho nos olhos vira poesia quando os planos mudam, e as horas correm felizes.",
+  "Porque teu otimismo me dá paz na fila do mercado, e eu quero pausar o tempo.",
+  "Porque tua risadinha faz o tempo voar no trânsito, e a vida fica doce.",
+  "Porque tua doçura me dá vontade de sonhar quando o mundo parece grande demais, e eu penso: que sorte a minha.",
+  "Porque teu coração gigante me dá vontade de sonhar na fila do mercado, e fico torcendo pra nunca acabar.",
+  "Porque tua mão na minha me acolhe no café da tarde, e eu sei que vai dar certo.",
+  "Porque tua generosidade me leva pra perto quando ouço tua voz, e as horas correm felizes.",
+  "Porque tua fé me abraça por dentro quando a semana pesa, e eu me apaixono de novo.",
+  "Porque tua presença me dá coragem nas viagens que a gente planeja, e eu lembro que amor é simples.",
+  "Porque tua criatividade me completa quando o sol bate na janela, e eu tenho certeza de nós.",
+  "Porque teu cheirinho me dá vontade de sonhar no meio do caos, e eu quero mais um abraço.",
+  "Porque tua presença calma me inspira no trânsito, e eu lembro que amor é simples.",
+  "Porque teu abraço apertado deixa tudo mais leve na nossa playlist, e tudo faz sentido.",
+  "Porque tua sensibilidade me ensina na fila do mercado, e tudo faz sentido.",
+  "Porque tua criatividade deixa tudo mais leve na nossa playlist, e meu coração sorri.",
+  "Porque teus planos me dá forças quando os planos mudam, e eu tenho certeza de nós.",
+  "Porque tua sensibilidade me ensina quando os planos mudam, e eu penso: que sorte a minha.",
+  "Porque tua coragem me completa no improviso, e eu quero pausar o tempo.",
+  "Porque tua sinceridade me acalma nas nossas caminhadas, e eu só consigo agradecer.",
+  "Porque teu jeito bobo me acolhe nas mensagens inesperadas, e eu me apaixono de novo.",
+  "Porque teu jeitinho carinhoso me faz melhor quando a casa tá silenciosa, e eu me sinto em casa.",
+  "Porque teus planos me dá vontade de sonhar quando a noite cai, e eu me apaixono de novo.",
+  "Porque teu bom humor me lembra quem sou quando a semana pesa, e eu respiro aliviado.",
+  "Porque tua coragem me dá forças nas viagens que a gente planeja, e eu respiro aliviado.",
+  "Porque teus olhos me dá vontade de dançar quando os planos mudam, e eu lembro que amor é simples.",
+  "Porque teu cuidado me acalma no trânsito, e meu coração sorri.",
+  "Porque teus conselhos me abraça por dentro quando a gente ri por nada, e eu só consigo agradecer.",
+  "Porque tua mão na minha ilumina a casa quando a casa tá silenciosa, e as horas correm felizes.",
+  "Porque tua mão na minha me abraça por dentro quando a noite cai, e eu quero pausar o tempo.",
+  "Porque teu abraço apertado me acalma a mente no caminho de casa, e eu me sinto em casa.",
+  "Porque teu sorriso me lembra quem sou quando o sono chega, e a vida fica doce.",
+  "Porque teus sonhos me faz suspirar quando a casa tá silenciosa, e as horas correm felizes.",
+  "Porque tua companhia vira poesia nas manhãs de domingo, e eu me sinto em casa.",
+  "Porque tua criatividade me deixa em paz na fila do mercado, e eu encontro repouso.",
+  "Porque teu jeitinho vira poesia no caminho de casa, e eu me sinto em casa.",
+  "Porque teu jeito sério me aquece o peito no primeiro gole de café, e eu lembro que amor é simples.",
+  "Porque teu cuidado me dá paz na fila do mercado, e eu penso: que sorte a minha.",
+  "Porque teu abraço me faz sorrir na hora do filme, e eu me sinto em casa.",
+  "Porque tua paz faz o tempo voar quando tudo parece difícil, e eu lembro que amor é simples.",
+  "Porque tua companhia me dá vontade de dançar no sofá da sala, e as horas correm felizes."
+];
+    const reasons = [...curated];
+    for (let i = curated.length; i < 365; i++) {
+      reasons.push(`Porque te amo de formas que nem cabem em palavras (#${i+1}).`);
+    }
+
+    // Estado
+    let current = 0;
+    const readSet = new Set(JSON.parse(localStorage.getItem("reasons_read") || "[]"));
+
+    // DOM
+    const $badge = document.getElementById('badge');
+    const $text = document.getElementById('text');
+    const $btnRead = document.getElementById('btnRead');
+    const $readLabel = document.getElementById('readLabel');
+    const $progressText = document.getElementById('progressText');
+    const $progressBar = document.getElementById('progressBar');
+    const $grid = document.getElementById('grid');
+
+    function fmt(i){ return `#${i+1}`; }
+    function updateProgress(){
+      const pct = (readSet.size / reasons.length)*100;
+      $progressText.textContent = `${readSet.size}/365`;
+      $progressBar.style.width = `${pct}%`;
+      localStorage.setItem("reasons_read", JSON.stringify([...readSet]));
+    }
+    function setReadUI(){
+      const isRead = readSet.has(current);
+      $btnRead.classList.toggle('active', isRead);
+      $btnRead.setAttribute('aria-pressed', isRead ? 'true' : 'false');
+      $btnRead.innerHTML = isRead ? '<i>✓</i> Marcado como lido' : '<i>✓</i> Marcar como lido';
+      $readLabel.textContent = isRead ? 'Lido ✅' : 'Ainda não lido';
+      $badge.classList.toggle('read', isRead);
+    }
+    function setCurrent(i, burst=false){
+      current = ((i % reasons.length) + reasons.length) % reasons.length;
+      $badge.textContent = fmt(current);
+      $text.textContent = reasons[current];
+      setReadUI();
+      if (burst) confettiBurst();
+      // Scroll top suave no mobile
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    function dayDiff(a,b){ return Math.floor((b-a)/(24*60*60*1000)); }
+    function motiveOfTodayIndex(){
+      const diff = Math.max(0, dayDiff(START_DATE, new Date()));
+      return diff % reasons.length;
+    }
+
+    // Grid (sem busca, só toggle e marcação individual)
+    function renderGrid(){
+      $grid.innerHTML = "";
+      reasons.forEach((r,i)=>{
+        const gc = document.createElement('div');
+        gc.className = 'gc' + (readSet.has(i) ? ' read' : '');
+        gc.innerHTML = `
+          <span class="mini-badge">${fmt(i)}</span>
+          <div style="font-size:.95rem; line-height:1.45; margin-top: 18px;">${r}</div>
+          <div class="mini-toggle" role="button" aria-pressed="${readSet.has(i)}" style="margin-top:10px;">
+            ✓ ${readSet.has(i) ? 'Lido' : 'Marcar como lido'}
+          </div>
+        `;
+        // abrir no destaque
+        gc.addEventListener('click', (ev)=>{
+          // se o clique foi no mini-toggle, não navegar, apenas alternar
+          if (ev.target && ev.target.classList.contains('mini-toggle')) return;
+          setCurrent(i);
+        });
+        // alternar lido
+        gc.querySelector('.mini-toggle').addEventListener('click', ()=>{
+          if (readSet.has(i)) readSet.delete(i); else readSet.add(i);
+          gc.classList.toggle('read', readSet.has(i));
+          gc.querySelector('.mini-toggle').setAttribute('aria-pressed', readSet.has(i));
+          gc.querySelector('.mini-toggle').textContent = readSet.has(i) ? '✓ Lido' : '✓ Marcar como lido';
+          if (i === current) setReadUI();
+          updateProgress();
+        });
+        $grid.appendChild(gc);
+      });
+    }
+
+    // Eventos principais
+    document.getElementById('btnPrev').addEventListener('click', ()=> setCurrent(current-1));
+    document.getElementById('btnNext').addEventListener('click', ()=> setCurrent(current+1));
+    document.getElementById('btnToday').addEventListener('click', ()=> setCurrent(motiveOfTodayIndex(), true));
+
+    document.getElementById('btnToggleGrid').addEventListener('click', ()=>{
+      const open = $grid.style.display === 'grid';
+      $grid.style.display = open ? 'none' : 'grid';
+      $grid.setAttribute('aria-hidden', open ? 'true' : 'false');
+      if (!open) renderGrid();
+    });
+
+    // Botão grande de leitura
+    $btnRead.addEventListener('click', ()=>{
+      if (readSet.has(current)) readSet.delete(current); else readSet.add(current);
+      setReadUI();
+      updateProgress();
+      if (readSet.has(current)) confettiBurst();
+    });
+
+    // Gestos (swipe) no card destaque — mobile friendly
+    (function attachSwipe(){
+      const el = document.getElementById('highlight');
+      let x0=null, y0=null, t0=0;
+      el.addEventListener('touchstart', e=>{ const t=e.touches[0]; x0=t.clientX; y0=t.clientY; t0=Date.now(); }, {passive:true});
+      el.addEventListener('touchend', e=>{
+        if(x0===null) return;
+        const t=e.changedTouches[0];
+        const dx=t.clientX-x0, dy=t.clientY-y0, dt=Date.now()-t0;
+        if (Math.abs(dx)>40 && Math.abs(dy)<50 && dt<600){
+          if (dx<0) setCurrent(current+1); else setCurrent(current-1);
+        }
+        x0=y0=null;
+      }, {passive:true});
+    })();
+
+    // Init
+    setCurrent(motiveOfTodayIndex());
+    updateProgress();
+  </script>
+</body>
+</html>

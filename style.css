@@ -842,3 +842,80 @@ audio#bg-music {
 }
 
 
+.cta-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+@media (min-width: 560px) {
+  .cta-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.cta-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fff0f6 0%, #ffe6f0 100%);
+  border: 1px solid #ffd6e6;
+  box-shadow: 0 8px 20px rgba(255, 105, 180, .12);
+  text-decoration: none;
+  color: #7a3956;
+  transition: transform .15s ease, box-shadow .15s ease, background .2s ease;
+}
+.cta-card:hover,
+.cta-card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(255, 105, 180, .18);
+  outline: none;
+}
+.cta-icon {
+  font-size: 1.45rem;
+  line-height: 1;
+}
+.cta-content {
+  display: grid;
+  gap: 2px;
+}
+.cta-title {
+  font-weight: 800;
+  font-size: 1.02rem;
+}
+.cta-sub {
+  font-size: .92rem;
+  color: #90506e;
+}
+
+/* Variante extra (ex.: 1 ano) */
+.cta-card.is-year {
+  background: linear-gradient(135deg, #fff5fa 0%, #ffe9ff 100%);
+  border-color: #f8c7ff;
+  color: #6c3a7a;
+  box-shadow: 0 8px 20px rgba(199, 95, 236, .12);
+}
+.cta-card.is-year:hover,
+.cta-card.is-year:focus-visible {
+  box-shadow: 0 10px 26px rgba(199, 95, 236, .18);
+}
+
+/* Botão “link grande” reutilizável */
+.btn-large {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #ff69b4;
+  color: #fff;
+  border: 1px solid #ff69b4;
+  font-weight: 800;
+  text-decoration: none;
+  transition: filter .15s ease, transform .1s ease;
+}
+.btn-large:hover,
+.btn-large:focus-visible { filter: brightness(1.05); outline: none; }
+.btn-large:active { transform: translateY(1px); }
