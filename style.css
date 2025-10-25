@@ -12,29 +12,29 @@ button:hover { background: #ffa6c9; }
 
 /* ===== Centralizar CTAs da tela principal ===== */
 
-/* Garante centralização dos próprios cards dentro do grid */
-.cta-grid {
-  /* se for grid: */
-  display: grid;
-  place-items: center;          /* centraliza nas duas direções */
+/* ===== Override: manter emoji no começo e centralizar apenas o texto ===== */
+
+/* mantém layout em linha (emoji à esquerda, textos à direita) */
+.cta-card {
+  flex-direction: row !important;   /* se antes ficou column, força linha */
+  align-items: center;
+  justify-content: center;          /* centraliza o bloco (emoji+texto) dentro do card */
   gap: 12px;
 }
 
-/* Se em algum lugar virou flex, isso também ajuda: */
-.cta-grid {
-  justify-content: center;      /* redundante, mas inofensivo */
+/* texto centralizado, independentemente do alinhamento do card */
+.cta-content {
+  display: grid;
+  place-items: center;              /* centraliza títulos/subtítulos */
+  text-align: center;
 }
 
-/* Centraliza conteúdo DENTRO do card */
-.cta-card {
-  display: flex !important;     /* força flex no <a> mesmo se algo sobrescreveu */
-  flex-direction: column;
-  justify-content: center;      /* centra verticalmente */
-  text-align: center;           /* textos alinhados */
-  width: 100%;
-  max-width: 520px;             /* limita largura pra não esticar demais */
-  margin: 0 auto;               /* garante centrado se não for grid */
+/* garante o emoji no começo, sem centralizar */
+.cta-icon {
+  margin-right: 0;                  /* ajuste fino opcional */
+  line-height: 1;
 }
+
 
 /* Ícone e bloco de textos alinhados */
 .cta-icon { line-height: 1; }
