@@ -1,11 +1,7 @@
 /* reset e estilo base */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Permanent+Marker&display=swap");
 
-body {
-  background: linear-gradient(to right, #ffd1dc, #ffe4e1);
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  color: #444; text-align: center; padding: 1rem;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* conteúdo principal */
 .container { max-width: 500px; margin: auto; background: white; border-radius: 16px; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
@@ -28,9 +24,6 @@ button:hover { background: #ffa6c9; }
 .cta-grid {
   justify-content: center;      /* redundante, mas inofensivo */
 }
-
-/* Carrega a fonte para T O D A S as páginas que usam style.css */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap");
 
 /* Centraliza conteúdo DENTRO do card */
 .cta-card {
@@ -59,8 +52,9 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  -webkit-text-size-adjust: 100%; /* evita “aumentos” no iOS */
+  -webkit-text-size-adjust: 100%;
 }
+
 
 
 
